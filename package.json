@@ -1,0 +1,31 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "natasha kelly portfolio",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gURLmeetsCode/webpage2019.git"
+  },
+  "author": "Natasha Kelly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gURLmeetsCode/webpage2019/issues"
+  },
+  "homepage": "https://github.com/gURLmeetsCode/webpage2019#readme",
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "babel": "^6.23.0",
+    "express": "^4.17.0",
+    "nodemon": "^1.19.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2"
+  }
+}
