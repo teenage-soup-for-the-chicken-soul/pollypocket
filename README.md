@@ -1,6 +1,6 @@
-# Portfolio
+# Poly Pocket
 
-Full Stack Software Engineering Portfolio
+A web and mobile app that saves articles online and renders them offline with a built in reading incentive tool.
 
 ## Getting Started
 
@@ -8,29 +8,60 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-This project require node dependencies so please make sure you have the latest version of node installed. See [node](https://nodejs.org/en/)
+This project uses CouchDB, please be sure install on your local machine
+find more here. [CouchDB](http://couchdb.apache.org)
 
 
 ### Installing
 
-To get started
+
+This script will seed your database
+```
+npm run seed
+```
+This script will create your db view for the json output
 
 ```
-npm install
+node makeView.js
 ```
-Visit localhost:5001
+
+This script will start the application
+
+```
+npm run start
+```
+
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
 
 
 ## Deployment
 
-To view [live version](http://www.somthinggoeshere.com/)
+[Live](https://github.com/teenage-soup-for-the-chicken-soul/proofofConcept.git)
 
 ## Built With
 
 * [React](https://reactjs.org) - The web framework used
-* [Webpack](https://webpack.js.org) - Dependency Management
+* [Node](https://nodejs.org/en/) - JavaScript runtime built on Chrome's V8 JavaScript engine.
+* [PouchDb](https://pouchdb.com) - Offline db syncing
 
 
-## Author
+## Authors
 
-* **Natasha Kelly** - [github](https://github.com/gURLmeetsCode)
+See also the list of [contributors](https://github.com/orgs/teenage-soup-for-the-chicken-soul/people) who participated in this project.
+
+
+## Acknowledgments
+
+* Thanks to GH!

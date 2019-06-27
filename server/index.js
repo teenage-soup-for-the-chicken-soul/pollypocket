@@ -15,8 +15,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 
-// auth mount + routes
-// app.use('/auth', require('./routes/auth'))
+// for mounting + routes
+app.use('/routes', require('./routes')); // include our routes!
+
 
 // Static middleware
 app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -41,6 +42,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500)
   res.send(err.message || 'Internal server error')
 })
+
 
 app.listen(PORT, () => console.log(`
       ==> 🌎 Listening at http://localhost:${PORT}
