@@ -10,3 +10,4 @@ npm-debug.log
 
 # OSX
 .DS_Store
+.env

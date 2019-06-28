@@ -1,4 +1,4 @@
-import React from "react"
+import React,{Component} from "react"
 import axios from "axios"
 
 import DB from '../db.js'
@@ -7,6 +7,7 @@ class App extends React.Component {
  constructor() {
    super();
    this.state = {
+     db: new DB("articles"),
      parsed: '',
      stringParsed: false
    };
@@ -27,8 +28,11 @@ class App extends React.Component {
  }
 
  render() {
+   console.log()
    return this.state.stringParsed ? (
-     <div>{this.state.parsed}</div>
+     <div>
+      {this.state.parsed}
+     </div>
    ) : (
      <div>
        <button type="button" onClick={() => this.handleClick()}>

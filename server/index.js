@@ -3,7 +3,9 @@ const express = require('express')
 const path = require('path')
 const morgan = require('morgan')
 const app = express()
-const PORT = 5001
+const PORT = process.env.PORT || 3000;
+
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 
 
 
@@ -46,5 +48,4 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => console.log(`
       ==> 🌎 Listening at http://localhost:${PORT}
-      http://localhost:5001/
 `))
