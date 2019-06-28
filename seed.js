@@ -3,8 +3,8 @@ var cheerio = require("cheerio");
 
 const nano = require("nano")("http://admin:graceHopper@localhost:5984");
 
-nano.db.create("body_test");
-const bodyTest = nano.use("body_test");
+// nano.db.create("body_test");
+const bodyTest = nano.use("alice2");
 
 function insertData(url, goal, title) {
   //  request(url, function (error, response, html) {

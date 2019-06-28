@@ -8,7 +8,7 @@ class App extends React.Component {
  constructor() {
    super();
    this.state = {
-     db: new DB("articles"),
+     db: new DB("alice2"),
      parsed: '',
      stringParsed: false
    };
@@ -16,13 +16,16 @@ class App extends React.Component {
  }
 
   componentDidMount() {
-    axios
-      .get("http://127.0.0.1:5984/body_test/2ca86a060aeb361568fd28b4c6008e01")
-      .then(json => this.setState({ parsed: json.data.linkUrl }));
+    // axios
+    //   .get("http://127.0.0.1:5984/body_test/2ca86a060aeb361568fd28b4c6008e01")
+    //   .then(json => this.setState({ parsed: json.data.linkUrl }));
+
+    // this.state.db.getAllArticles("2ca86a060aeb361568fd28b4c600abd1")
   }
 
   handleClick() {
     this.setState({ stringParsed: true });
+    this.state.db.getAllArticles("2ca86a060aeb361568fd28b4c600abd1")
   }
 
   render() {
