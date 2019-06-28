@@ -11,19 +11,22 @@ These instructions will get you a copy of the project up and running on your loc
 This project uses CouchDB, please be sure install on your local machine
 find more here. [CouchDB](http://couchdb.apache.org)
 
+Also you may need to run this script to enable CORS
+```
+npm install -g add-cors-to-couchdb
+add-cors-to-couchdb
+```
+
 
 ### Installing
 
 
-This script will seed your database
+This script will seed your database and create your db view for the json output
+
 ```
 npm run seed
 ```
-This script will create your db view for the json output
 
-```
-node makeView.js
-```
 
 This script will start the application
 

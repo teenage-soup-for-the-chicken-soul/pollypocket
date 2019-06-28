@@ -1,18 +1,19 @@
-import React from "react";
-import axios from "axios";
-import DomTest from "../Components/domTest";
-import DB from "../db.js";
+
+import React,{Component} from "react"
+import axios from "axios"
 import renderHTML from "react-render-html";
+import DB from '../db.js'
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      parsed: "",
-      stringParsed: false
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
+ constructor() {
+   super();
+   this.state = {
+     db: new DB("articles"),
+     parsed: '',
+     stringParsed: false
+   };
+   this.handleClick = this.handleClick.bind(this);
+ }
 
   componentDidMount() {
     axios
