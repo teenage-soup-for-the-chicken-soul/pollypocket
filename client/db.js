@@ -5,7 +5,7 @@ export default class DB{
     // set up the remote pouchdb and local and sync
     const remotedb = new PouchDB(`http://admin:graceHopper@localhost:5984/${name}`)
     console.log ("Remote database created Successfully.");
-    this.db = new PouchDB(name)
+    this.db = new PouchDB(name, { skip_setup: true });
     console.log ("Local database created Successfully.");
     this.db.sync(remotedb, {
       live: true,
@@ -25,9 +25,9 @@ export default class DB{
     let addedArticle = await this.db.put(obj)
   }
 
-  async getAllArticles(obj){
-    let allArticles = await this.db.get("id-goes-here").then(function(obj){
-      console.log(obj)
+  async getAllArticles(id){
+    let allArticles = await this.db.get(id).then(function(doc){
+      console.log(doc)
     })
   }
 
