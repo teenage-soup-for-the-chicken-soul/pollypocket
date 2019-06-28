@@ -7,7 +7,7 @@
     "start": "npm run start-server & npm run build-watch",
     "build-watch": "webpack -w --mode development",
     "start-server": "nodemon server --ignore public",
-    "seed": "node seed.js makeView.js "
+    "seed": "node seed.js makeView.js"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,6 @@
     "nodemon": "^1.19.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-render-html": "^0.6.0",
     "react-router-dom": "^5.0.0",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2"
@@ -54,6 +53,7 @@
     "file-loader": "^3.0.1",
     "nano": "^8.1.0",
     "pouchdb": "^7.1.1",
+    "react-render-html": "^0.6.0",
     "request": "^2.88.0",
     "style-loader": "^0.23.1",
     "webpack": "^3.9.1",
