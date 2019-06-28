@@ -33,6 +33,7 @@
     "nodemon": "^1.19.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-render-html": "^0.6.0",
     "react-router-dom": "^5.0.0",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2"
