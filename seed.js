@@ -1,5 +1,5 @@
-var request = require('request')
-var cheerio = require('cheerio')
+const request = require('request')
+const cheerio = require('cheerio')
 
 const nano = require('nano')('http://admin:graceHopper@localhost:5984')
 
