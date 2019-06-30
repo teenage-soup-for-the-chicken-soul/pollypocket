@@ -1,70 +1,33 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-const isDev = process.env.NODE_ENV === 'development'
+'use strict';
 
-module.exports = {
-  mode: isDev ? 'development' : 'production',
-  entry: [
-    '@babel/polyfill', // enables async-await
-    './client/index.js'
-  ],
-  output: {
-    path: __dirname,
-    filename: './public/bundle.js'
-  },
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
-  devtool: 'source-map',
-  watchOptions: {
-    ignored: /node_modules/
-  },
-=======
-=======
->>>>>>> proofOfConcept/master
+const { resolve } = require('path')
 
 module.exports = {
   entry: ['babel-polyfill', './client/index'],
   output: {
     path: __dirname,
-    filename: './public/bundle.js',
+    filename: './public/bundle.js'
   },
+  mode: 'development',
   context: __dirname,
   devtool: 'source-map',
-<<<<<<< HEAD
->>>>>>> proofOfConcept/master
-=======
->>>>>>> proofOfConcept/master
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-<<<<<<< HEAD
-<<<<<<< HEAD
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      }
-    ]
-  }
-}
-=======
-=======
->>>>>>> proofOfConcept/master
-        exclude: /(node_modules|bower_components)/,
+        test: /jsx?$/,
+        include: resolve(__dirname, './client'),
         loader: 'babel-loader'
       },
-      // use the style-loader/css-loader combos for anything matching the .css extension
       {
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader',
+          'css-loader'
         ]
       }
     ]
   }
 };
-<<<<<<< HEAD
->>>>>>> proofOfConcept/master
-=======
->>>>>>> proofOfConcept/master
