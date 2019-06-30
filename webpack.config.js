@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
@@ -19,6 +20,8 @@ module.exports = {
     ignored: /node_modules/
   },
 =======
+=======
+>>>>>>> proofOfConcept/master
 
 module.exports = {
   entry: ['babel-polyfill', './client/index'],
@@ -28,11 +31,15 @@ module.exports = {
   },
   context: __dirname,
   devtool: 'source-map',
+<<<<<<< HEAD
+>>>>>>> proofOfConcept/master
+=======
 >>>>>>> proofOfConcept/master
   module: {
     rules: [
       {
         test: /\.jsx?$/,
+<<<<<<< HEAD
 <<<<<<< HEAD
         exclude: /node_modules/,
         loader: 'babel-loader'
@@ -41,6 +48,8 @@ module.exports = {
   }
 }
 =======
+=======
+>>>>>>> proofOfConcept/master
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader'
       },
@@ -55,4 +64,7 @@ module.exports = {
     ]
   }
 };
+<<<<<<< HEAD
+>>>>>>> proofOfConcept/master
+=======
 >>>>>>> proofOfConcept/master

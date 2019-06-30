@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 node_modules
 public/bundle.js
 public/bundle.js.map
@@ -7,6 +8,8 @@ secrets.js
 npm-debug.log
 yarn-error.log
 =======
+=======
+>>>>>>> proofOfConcept/master
 # Ignore all node_modules
 node_modules/*
 
@@ -19,4 +22,7 @@ npm-debug.log
 
 # OSX
 .DS_Store
+<<<<<<< HEAD
+>>>>>>> proofOfConcept/master
+=======
 >>>>>>> proofOfConcept/master
