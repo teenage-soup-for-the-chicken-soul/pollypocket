@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
@@ -124,6 +125,8 @@ if (require.main === module) {
   createApp()
 }
 =======
+=======
+>>>>>>> proofOfConcept/master
 'use strict'
 const express = require('express')
 const path = require('path')
@@ -174,4 +177,7 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => console.log(`
       ==> 🌎 Listening at http://localhost:${PORT}
 `))
+<<<<<<< HEAD
+>>>>>>> proofOfConcept/master
+=======
 >>>>>>> proofOfConcept/master
