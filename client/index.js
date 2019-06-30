@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+<<<<<<< HEAD
 import {Provider} from 'react-redux'
 import {Router} from 'react-router-dom'
 import history from './history'
@@ -17,3 +18,14 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 )
+=======
+import App from './components/App'
+
+import './index.css';
+
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+>>>>>>> proofOfConcept/master
