@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "presets": [
     "@babel/react",
     "@babel/env"
@@ -29,4 +30,7 @@
     "@babel/plugin-proposal-numeric-separator",
     "@babel/plugin-proposal-throw-expressions"
   ]
+=======
+  "presets": ["@babel/preset-react", "@babel/preset-env"]
+>>>>>>> proofOfConcept/master
 }
