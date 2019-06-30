@@ -1,59 +1,92 @@
-var request = require("request");
-var cheerio = require("cheerio");
+'use strict'
 
-const nano = require("nano")("http://admin:graceHopper@localhost:5984");
+const request = require('request')
+const cheerio = require('cheerio')
+// const nano = require("nano")
+//
+// nano(process.env.COUCHDB_URL || 'http://127.0.0.1:5984');
+const nano = require('nano')('http://admin:graceHopper@localhost:5984')
 
-// nano.db.create("body_test");
-const bodyTest = nano.use("alice2");
+nano.db.create('users').then(body => {
+  console.log('database users created!')
+})
 
-function insertData(url, goal, title) {
-  //  request(url, function (error, response, html) {
-  //    if (!error && response.statusCode == 200) {
+const couchDB = nano.use('users')
 
-  //       tester.insert({
-  //         linkUrl: html, title: title, goalId: goal
-  //       })
-
-  //        console.log('you have inserted a document with an _id of rabbit')
-
-  //    }
-  //  });
-
-  request(
-    "https://medium.com/react-native-development/easily-build-forms-in-react-native-9006fcd2a73b",
+async function seed(data, goals = {}) {
+  await request(
+    'https://medium.com/react-native-development/easily-build-forms-in-react-native-9006fcd2a73b',
     function(error, response, html) {
       if (!error && response.statusCode == 200) {
-        var $ = cheerio.load(html);
-        $("body").each(function(i, element) {
-          var a = $(this).html();
-          bodyTest.insert({
-            linkUrl: a,
-            title: title,
-            goalId: goal
-          });
-        });
+        var $ = cheerio.load(html)
+        $('body').each(function(i, element) {
+          var a = $(this).html()
+          couchDB.insert({
+            email: data.email,
+            password: data.password,
+            goals: [].concat(goals)
+          })
+        })
       }
     }
-  );
+  )
 }
 
-insertData('https://onezero.medium.com/we-already-know-what-our-data-is-worth-48bca5643844', 2, "Fun Article for Frenz")
+async function runSeed() {
+  console.log('seeding...')
+  try {
+    await seed(
+      {
+        email: 'cody@testmail.com',
+        password: 'test123'
+      },
+      {
+        goalId: 2,
+        title: 'Fun Article for Frenz',
+        articles: [].concat(
+          'https://onezero.medium.com/we-already-know-what-our-data-is-worth-48bca5643844'
+        )
+      }
+    )
+    await seed(
+      {
+        email: 'suzieQ@testmail.com',
+        password: 'test123'
+      },
+      {
+        goalId: 2,
+        title: 'Quiet Time',
+        articles: [].concat(
+          'https://elemental.medium.com/the-cryptic-language-of-non-verbal-communication-c3deee315326'
+        )
+      }
+    )
 
-insertData('https://elemental.medium.com/the-cryptic-language-of-non-verbal-communication-c3deee315326', 2, "Quiet Time")
+    await seed(
+      {
+        email: 'fuzzywuzzy@testmail.com',
+        password: 'test123'
+      },
+      {
+        goalId: 1,
+        title: 'Teenage Wasteland',
+        articles: [].concat(
+          'https://forge.medium.com/dont-be-friends-with-your-teenage-kid-7164f6844e5c'
+        )
+      }
+    )
+  } catch (err) {
+    console.error(err)
+    process.exitCode = 1
+  }
+}
 
-insertData('https://forge.medium.com/dont-be-friends-with-your-teenage-kid-7164f6844e5c', 1, 'Teenage Wasteland')
+// Execute the `seed` function, IF we ran this module directly (`node seed`).
+// `Async` functions always return a promise, so we can use `catch` to handle
+// any errors that might occur inside of `seed`.
+if (module === require.main) {
+  runSeed()
+}
 
-// request('https://medium.com/react-native-development/easily-build-forms-in-react-native-9006fcd2a73b', function (error, response, html) {
-//   if (!error && response.statusCode == 200) {
-//     var $ = cheerio.load(html);
-//     // $('div.comhead').each(function(i, element){
-//       var a = $('span.n').prev()
-//       console.log(a.text);
-
-//   }
-// });
-
-// $('div[id="list"]').find('div > div > a').each(function (index, element) {
-//   list.push($(element).attr('href'));
-// });
-// console.dir(list)
+// we export the seed function for testing purposes (see `./seed.spec.js`)
+module.exports = seed
