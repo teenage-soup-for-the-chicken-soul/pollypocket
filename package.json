@@ -4,9 +4,7 @@
   "description": "capstone project",
   "main": "main.js",
   "scripts": {
-    "start": "npm run start-server & npm run build-watch",
-    "build-watch": "webpack -w --mode development",
-    "start-server": "nodemon server --ignore public",
+    "start-dev": "webpack -w --mode development & nodemon server -e html,js,css --ignore public",
     "seed": "node seed.js"
   },
   "repository": {
