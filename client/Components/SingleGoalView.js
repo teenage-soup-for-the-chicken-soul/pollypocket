@@ -23,6 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
+
 const classes = useStyles();
 class GoalView extends React.Component{
 
