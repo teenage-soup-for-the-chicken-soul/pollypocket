@@ -1,4 +1,9 @@
-// import React from "react";
+import React from "react";
+import { connect } from "react-redux";
+import { getArticlesThunk } from "../store/reducers/articles";
+import { Link } from "react-router-dom";
+import AddArticleForm from './addArticleForm';
+
 // import { makeStyles } from "@material-ui/core/styles";
 // import Avatar from "@material-ui/core/Avatar";
 // import Chip from "@material-ui/core/Chip";
@@ -37,56 +42,102 @@
 // // import {someThunk} from 'somewhere'
 // // import {me} from '../store/user' => or our version of it
 // const classes = useStyles();
-// class Dashboard extends React.Component {
-//   handleDelete() {}
+class Dashboard extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      currArticles: []
+    };
+  }
+  async componentDidMount() {
+    await this.props.getArticles(this.props.userKey);
+    this.setState({ currArticles: this.props.articles });
+  }
 
-//   handleClick() {}
+  handleDelete() {}
 
-//   render() {
-//     if (this.props.loading) {
-//       return <div>loading...</div>;
-//     }
-//     return (
-//       <div id="container">
-//         <div id="sidebar">
-//           {goalList.map(goal => {
-//             <Chip
-//               label="goal.name"
-//               onClick={handleclick}
-//               onDelete={handleDelete}
-//               className={classes.chip}
-//             />;
-//           })}
-//         <button type='button'>Add Article</button>
-//         </div>
-//         {goalList.map(goal => (
-//           <div className={classes.root}>
-//             <GridList className={classes.gridList} cols={2.5}>
-//               {articles.map(article => (
-//                 <GridListTile key={article.img}>
-//                   <img src={article.img} alt={article.title} />
-//                   <GridListTileBar
-//                     title={article.title}
-//                     classes={{
-//                       root: classes.titleBar,
-//                       title: classes.title
-//                     }}
-//                     actionIcon={
-//                       <IconButton aria-label={`star ${article.title}`}>
-//                         <StarBorderIcon className={classes.title} />
-//                       </IconButton>
-//                     }
-//                   />
-//                 </GridListTile>
-//               ))}
-//             </GridList>
-//           </div>
-//         ))}
+  handleClick() {}
 
-//         <div id="goalOneList" />
-//         <div id="goalTwoList" />
-//         <div id="goalThreeList" />
-//       </div>
-//     );
-//   }
-// }
+  render() {
+    
+    return (
+      <div>
+         <AddArticleForm/>
+        <div>Here is our Dashboard</div>
+
+        {this.state.currArticles.length !== 0 ? (
+          this.state.currArticles.map(article => (
+            <Link
+              to={{
+                pathname: "/article",
+                state: {
+                  currentArticle: article
+                }
+              }}
+              key={article._id}
+            >
+              {article.title}
+            </Link>
+          ))
+        ) : (
+          <div>No articles</div>
+        )}
+      </div>
+
+      // <div id="container">
+      //   <div id="sidebar">
+      //     {goalList.map(goal => {
+      //       <Chip
+      //         label="goal.name"
+      //         onClick={handleclick}
+      //         onDelete={handleDelete}
+      //         // className={classes.chip}
+      //       />;
+      //     })}
+      //   <button type='button'>Add Article</button>
+      //   </div>
+      //   {goalList.map(goal => (
+      //     <div
+      //     className={classes.root}>
+      //       <GridList className={classes.gridList} cols={2.5}>
+      //         {articles.map(article => (
+      //           <GridListTile key={article.img}>
+      //             <img src={article.img} alt={article.title} />
+      //             <GridListTileBar
+      //               title={article.title}
+      //               classes={{
+      //                 root: classes.titleBar,
+      //                 title: classes.title
+      //               }}
+      //               actionIcon={
+      //                 <IconButton aria-label={`star ${article.title}`}>
+      //                   <StarBorderIcon className={classes.title} />
+      //                 </IconButton>
+      //               }
+      //             />
+      //           </GridListTile>
+      //         ))}
+      //       </GridList>
+      //     </div>
+      //   ))}
+
+      //   <div id="goalOneList" />
+      //   <div id="goalTwoList" />
+      //   <div id="goalThreeList" />
+      // </div>
+    );
+  }
+}
+const mapState = state => ({
+  articles: state.articles.articles,
+  userKey: state.user.uniqueKey
+});
+
+const mapDispatch = dispatch => ({
+  getArticles: userKey => dispatch(getArticlesThunk(userKey))
+});
+
+export default connect(
+  mapState,
+  mapDispatch
+)(Dashboard);

@@ -1,8 +1,12 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const uuidv1 = require('uuid/v1');
 
 const User = db.define('user', {
+  uniqueKey: {
+  type: Sequelize.STRING
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
@@ -45,6 +49,7 @@ User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64')
 }
 
+
 User.encryptPassword = function(plainText, salt) {
   return crypto
     .createHash('RSA-SHA256')
@@ -64,6 +69,7 @@ const setSaltAndPassword = user => {
 }
 
 User.beforeCreate(setSaltAndPassword)
+User.beforeCreate(user => user.uniqueKey=uuidv1())
 User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword)

@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import renderHTML from 'react-render-html';
-import DB from '../db.js';
+import { connect } from "react-redux";
 
-class App extends React.Component {
+
+import {addArticleThunk} from "../store/reducers/articles"
+
+class addArticleForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      db: new DB('alice2'),
-      parsed: '',
-      stringParsed: false,
-      articleTitle: '',
-      articleUrl: '',
+
+      title: '',
+      articleURL: '',
       goalId: 1,
-      userId: 2,
+      userKey: ''
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleFindArticles = this.handleFindArticles.bind(this);
@@ -24,11 +23,13 @@ class App extends React.Component {
     //   .get("http://127.0.0.1:5984/body_test/2ca86a060aeb361568fd28b4c6008e01")
     //   .then(json => this.setState({ parsed: json.data.linkUrl }));
     // this.state.db.getAllArticles("2ca86a060aeb361568fd28b4c600abd1")
+   this.setState({userKey: this.props.userKey})
   }
 
   handleClick() {
     // this.setState({ stringParsed: true });
-    this.state.db.addArticle(this.state);
+    this.props.addArticle(this.state);
+    console.log("this is the STAAAATE", this.state);
   }
   async handleFindArticles() {
     // this.setState({ stringParsed: true });
@@ -37,18 +38,17 @@ class App extends React.Component {
   }
 
   render() {
-    return this.state.stringParsed ? (
-      <div>{renderHTML(this.state.parsed)}</div>
-    ) : (
+    return  (
+
       <div>
         <form>
           Article Title:
           <br />
           <input
             type="text"
-            value={this.state.articleTitle}
+            value={this.state.title}
             onChange={event =>
-              this.setState({ articleTitle: event.target.value })
+              this.setState({ title: event.target.value })
             }
           />
           <br />
@@ -56,9 +56,9 @@ class App extends React.Component {
           <br />
           <input
             type="text"
-            value={this.state.articleUrl}
+            value={this.state.articleURL}
             onChange={event =>
-              this.setState({ articleUrl: event.target.value })
+              this.setState({ articleURL: event.target.value })
             }
           />
           <br />
@@ -93,4 +93,16 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapState = state => ({
+
+  userKey: state.user.uniqueKey
+});
+
+const mapDispatch = dispatch => ({
+ addArticle: obj => dispatch(addArticleThunk(obj))
+});
+
+export default connect(
+  mapState,
+  mapDispatch
+)(addArticleForm);
