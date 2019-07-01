@@ -33,37 +33,37 @@ render(){
   if (this.props.loading) {
     return <div>loading...</div>
   }
-  return(
-    <Div>Goal Title</Div>
-    <Button type='button'>Add Article</Button>
-    {resultOfDBFetch.map(article => (
-      <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image= "article.image"
-          title= "article.title"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-           Article Title
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Read Now
-        </Button>
-        <Button size="small" color="primary">
-          Mark as Read
-        </Button>
-        <Button size="small" color="primary">
-          Delete
-        </Button>
-      </CardActions>
-    </Card>
-    ))}
-  )
+//   return(
+//     <Div>Goal Title</Div>
+//     <Button type='button'>Add Article</Button>
+//     {resultOfDBFetch.map(article => (
+//       <Card className={classes.card}>
+//       <CardActionArea>
+//         <CardMedia
+//           className={classes.media}
+//           image= "article.image"
+//           title= "article.title"
+//         />
+//         <CardContent>
+//           <Typography gutterBottom variant="h5" component="h2">
+//            Article Title
+//           </Typography>
+//         </CardContent>
+//       </CardActionArea>
+//       <CardActions>
+//         <Button size="small" color="primary">
+//           Read Now
+//         </Button>
+//         <Button size="small" color="primary">
+//           Mark as Read
+//         </Button>
+//         <Button size="small" color="primary">
+//           Delete
+//         </Button>
+//       </CardActions>
+//     </Card>
+//     ))}
+  // )
 }
 
 
