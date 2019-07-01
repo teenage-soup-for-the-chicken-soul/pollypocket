@@ -5,12 +5,21 @@
   <meta charset="utf-8">
   <meta name='viewport' content='width=device-width initial-scale=1.0'>
   <title> PollyPocket </title>
-
   <link rel="stylesheet" href="/style.css">
+  <link rel="manifest" href="/manifest.json">
   <script  type="text/javascript" defer src="/bundle.js"></script>
 </head>
-
-<body>
-  <div id="root"></div>
-</body>
+  <body>
+    <div id="root"></div>
+    <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((reg) => {
+              console.log('Service worker registered.', reg);
+            });
+      });
+      }
+    </script>
+  </body>
 </html>
