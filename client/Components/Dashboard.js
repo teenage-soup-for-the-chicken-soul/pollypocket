@@ -1,88 +1,106 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
-const drawerWidth = 240;
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
+import DoneIcon from '@material-ui/icons/Done';
 
 const useStyles = makeStyles(theme => ({
+  // root: {
+  //   display: 'flex',
+  //   justifyContent: 'center',
+  //   flexWrap: 'wrap',
+  // },
+  chip: {
+    margin: theme.spacing(1),
+  },
   root: {
     display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
   },
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+  gridList: {
+    flexWrap: 'nowrap',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
+  title: {
+    color: theme.palette.primary.light,
   },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
+  titleBar: {
+    background:
+      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
 }));
+// import {someThunk} from 'somewhere'
+// import {me} from '../store/user' => or our version of it
+const classes = useStyles();
+class Dashboard extends React.Component{
 
-export default function PermanentDrawerLeft() {
-  const classes = useStyles();
+  handleDelete(){
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" noWrap>
-           Goal Title
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-        <div className={classes.toolbar} />
-        <Divider />
-        <List>
-          {['Goal 1', 'Goal 2', 'Goal 3'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        {/* <Divider />
-        <List>
-          {['Add Goal', 'Delete Goal', ].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-       // map of first four articles in goal
-       
-      </main>
+  }
+
+  handleClick(){
+
+  }
+
+  render(){
+    if (this.props.loading) {
+      return <div>loading...</div>
+    }
+    return (
+      <div id='container'>
+<div id='sidebar'>
+   {goalList.map(goal=> {
+        <Chip
+
+        label="goal.name"
+        onClick={handleclick}
+        onDelete={handleDelete}
+        className={classes.chip}
+      />
+   })}
+      </div>
+      {goalList.map(goal => (
+      <div className={classes.root}>
+      <GridList className={classes.gridList} cols={2.5}>
+        {articles.map(article => (
+ <GridListTile key={article.img}>
+ <img src={article.img} alt={article.title} />
+ <GridListTileBar
+   title={article.title}
+   classes={{
+     root: classes.titleBar,
+     title: classes.title,
+   }}
+   actionIcon={
+     <IconButton aria-label={`star ${article.title}`}>
+       <StarBorderIcon className={classes.title} />
+     </IconButton>
+   }
+ />
+</GridListTile>
+        ))}
+      </GridList>
     </div>
-  );
+      ))}
+
+      <div id='goalOneList'>
+
+      </div>
+      <div id='goalTwoList'>
+
+</div>
+<div id='goalThreeList'>
+
+</div>
+      </div>
+
+        );
+  }
 }
+
+

@@ -23,8 +23,9 @@ const useStyles = makeStyles({
   },
 });
 
-
+const classes = useStyles();
 class GoalView extends React.Component{
+
 // async componentDidMount{
 //   await this.props.me()
 // }
