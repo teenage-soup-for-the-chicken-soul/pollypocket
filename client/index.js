@@ -1,11 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './Components/App'
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import App from './app';
 import './index.css';
 
-
 ReactDOM.render(
-  <App />,
+  <HashRouter>
+    <App />
+  </HashRouter>,
   document.getElementById('root')
 );
