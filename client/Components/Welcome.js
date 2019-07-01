@@ -1,14 +1,13 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react';
 
 class Welcome extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         <h1>Hello World</h1>
       </div>
-    )
+    );
   }
 }
 
-
-module.exports = Welcome
+export default Welcome;
