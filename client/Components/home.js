@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SignIn from './signInView';
 
-export default class Routes extends Component {
+export default class Home extends Component {
   render() {
     return (
       <div>
