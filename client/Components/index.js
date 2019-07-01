@@ -6,3 +6,5 @@
 export { default as Home } from './home';
 export { default as Navbar } from './navbar';
 export { default as Footer } from './footer';
+export {default as UserHome} from './home'
+export {Login, Signup} from './authForm'
