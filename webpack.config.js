@@ -1,8 +1,7 @@
-'use strict';
-
-const { resolve } = require('path')
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
+  mode: isDev ? 'development' : 'production',
   entry: ['babel-polyfill', './client/index'],
   output: {
     path: __dirname,
@@ -11,6 +10,9 @@ module.exports = {
   mode: 'development',
   context: __dirname,
   devtool: 'source-map',
+  watchOptions: {
+    ignored: /node_modules/
+  },
   resolve: {
     extensions: ['.js', '.jsx']
   },
@@ -18,8 +20,10 @@ module.exports = {
     rules: [
       {
         test: /jsx?$/,
-        include: resolve(__dirname, './client'),
-        loader: 'babel-loader'
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
       },
       {
         test: /\.css$/,
