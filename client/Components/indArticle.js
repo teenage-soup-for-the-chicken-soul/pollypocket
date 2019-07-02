@@ -21,7 +21,7 @@ export default class IndArticle extends Component {
         <div>
           <h2>{art.title}</h2>
           {/* <h4>Author by line</h4> */}
-          <div> {renderHTML(art.articleURL)}</div>
+          <div> {renderHTML(art.linkData)}</div>
         </div>
       </div>
     );
