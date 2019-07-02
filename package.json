@@ -6,7 +6,8 @@
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "build-client-watch": "webpack -w",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
-    "seed": "node seed.js"
+    "seed": "node script/postgres-seed.js",
+    "deploy": "npm run seed script/deploy"
   },
   "repository": {
     "type": "git",
