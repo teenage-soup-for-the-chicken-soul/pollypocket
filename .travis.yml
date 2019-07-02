@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+  - node # uses most recent stable node version
+services:
+  - postgresql # starts up postgres
+addons:
+  postgresql: '9.6' # highest available postgres version on Travis
+dist: trusty # uses trusty environment
+sudo: false # when on trusty, uses Docker containers for speed
+notifications:
+  email:
+    on_success: change # default: change (only when going from broken to fixed)
+    on_failure: always # default: always (which is annoying, as it should be)
+install:
+  - npm ci # faster, goes only from package-lock
+before_script:
+  - psql -c 'create database "pollypocket-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+script:
+  - npm test             # test the code
+  - npm run build-client # make the bundle
+
+before_deploy:
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: polly-pocket # see README
+  api_key:
+    secure: "IVLt630xV2zDUBRs7WlzzgSHDzLAnZLr/c35wloQJvcaLJ+KI7eHn4+e0c3v+U3BmpDsVPMXb+zcMO5hAQcNzd7U2uy5GCQ6q57uoFNCjVypPl9LPkrfMa0ISV9RoHeNo2IaqR1QEDiD1xyHL80H3dK9q7gcvHTj9s51ir5b5xTfFCAlN5aMbKfYastcDUsXtBv14AtiVrC3TO2j2XZfdoQP0C3yKNpZu8e2JBwkcg87gmbtQ+cX7sb3ABFtAy3vXE90+qECMNUucWTx6pCtFY3Lt6Lv7UiGY4V7CruyArD6p+DuFsUqFSnRbPHos+MnmU/PBuTw2A405wMeO+1UsU9V+xzhO8mK69eYfSbkC8+CERBmObM18S7nav3sGkRSG1jKo89Hg7DdzUK0tb+YksZSbL2BO72tVMs4/PEli+n0j1DueH6EbASrVOW/vO6juhBQ6zVTUW0NvL2c3l5ToVc31hGuyVgwAa4JImdjOdX9odLOrVTHfeDvXFr8SPImsWeCwc8Q1PFYfY9Mt+RYnpCtKT7AOQr/eL948QIOhjKzh4buK4VN5PglatGxQ9YsRUhgGEltJ5B2R6Aj4pmRvnAGesPyOvciQWxpD18vRx8+9X1RswM32zRsFHD5LDv9tS0DJH53PidLD+byAqqzu8NtF9T91NeRUExNBrzbrxU=" # see README
