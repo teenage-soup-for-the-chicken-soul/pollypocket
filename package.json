@@ -2,7 +2,6 @@
   "name": "pollypocket",
   "version": "1.0.0",
   "description": "capstone project",
-  "main": "main.js",
   "scripts": {
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "build-client-watch": "webpack -w",

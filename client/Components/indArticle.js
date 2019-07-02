@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
-import renderHTML from 'react-render-html';
+import { renderHTML } from 'react-render-html';
 
 export default class IndArticle extends Component {
-  constructor(){
-    super()
-    this.state={
-      article: {}
-    }
+  constructor() {
+    super();
+    this.state = {
+      article: {},
+    };
   }
 
-
-  componentDidMount(){
-   const {currentArticle} = this.props.location.state
-   console.log("this is the current Article", currentArticle)
-   this.setState({article: currentArticle})
+  componentDidMount() {
+    const { currentArticle } = this.props.location.state;
+    this.setState({ article: currentArticle });
   }
   render() {
-    const art = this.state.article
-    console.log("this is art",art.linkData)
+    const art = this.state.article;
     return (
       <div>
         <button type="button">Back Btn</button>
@@ -27,7 +24,6 @@ export default class IndArticle extends Component {
           <div> {renderHTML(art.articleURL)}</div>
         </div>
       </div>
-
     );
   }
 }
