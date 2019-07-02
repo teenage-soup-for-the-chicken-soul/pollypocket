@@ -1,5 +1,5 @@
-import PouchDB from 'pouchDB';
-import Find from 'pouchdb-find';
+import PouchDB from "pouchDB";
+import Find from "pouchdb-find";
 PouchDB.plugin(Find);
 
 export default class DB {
@@ -8,22 +8,20 @@ export default class DB {
     const remotedb = new PouchDB(
       `http://admin:graceHopper@localhost:5984/${name}`
     );
-    console.log('Remote database created Successfully.');
+    console.log("Remote database created Successfully.");
     this.db = new PouchDB(name, { skip_setup: true });
-    console.log('Local database created Successfully.');
+    console.log("Local database created Successfully.");
     this.db.sync(remotedb, {
       live: true,
-      retry: true,
+      retry: true
     });
   }
 
   // CLASS METHODS ------------------------
 
-
-
   // ARTICLE METHODS
   async createDBIndex() {
-    this.db.createIndex({ index: { fields: ['userId'] } });
+    this.db.createIndex({ index: { fields: ["userKey"] } });
   }
 
   async getArticlesByUser(userId) {
@@ -32,26 +30,25 @@ export default class DB {
     });
   }
 
-
   async getAllArticles(id) {
     let allArticles = await this.db.get(id).then(function(doc) {
       console.log(doc);
     });
   }
 
-
   async addArticle(obj) {
     let newArticle = {
       _id: new Date().toISOString(),
       articleTitle: obj.articleTitle,
-      articleUrl: obj.articleUrl,
-      userId: obj.userId,
-      goalId: obj.goalId,
+      articleURL: obj.articleUrl,
+      userKey: obj.userId,
+      goalId: obj.goalId
     };
-    console.log('the object being put into db', newArticle);
+
+    console.log("the object being put into db", newArticle);
     this.db.put(newArticle).then(function(err, result) {
       if (!err) {
-        console.log('Successfully added a article!');
+        console.log("Successfully added a article!");
       } else {
         console.log(err);
       }
@@ -60,7 +57,7 @@ export default class DB {
 
   async updateAnArticle(doc) {
     // fetch mittens
-    db.get('id-goes-here')
+    db.get("id-goes-here")
       .then(function(doc) {
         // update their age
         doc.age = 4;
@@ -69,33 +66,32 @@ export default class DB {
       })
       .then(function() {
         // fetch mittens again
-        return db.get('id-goes-here');
+        return db.get("id-goes-here");
       })
       .then(function(doc) {
         console.log(doc);
       });
   }
 
-  async findArticle(inputUserId) {
-    this.db
-      .find({ selector: { userId: inputUserId } })
-      .then(function(err, result) {
+  findArticle(inputUserId) {
+    return this.db
+      .find({ selector: { userKey: {$eq: inputUserId }} })
+      .then(function(result, err) {
         if (!err) {
-          console.log('successfully found articles by user');
+          console.log("successfully found articles by user", result);
+          return result;
         } else {
-          console.log(err);
+          console.log("this is the error", err);
         }
       });
   }
-
-
 
   // USER METHODS
   async addUser(obj) {
     let user = {
       _id: new Date().toISOString(),
       email: obj.email,
-      password: obj.password,
+      password: obj.password
       // goals: {
       //   goalId: obj.goal.id,
       //   title: obj.goal.title,
@@ -105,7 +101,7 @@ export default class DB {
     };
     this.db.put(user).then(function(err, result) {
       if (!err) {
-        console.log('Successfully added a user!');
+        console.log("Successfully added a user!");
       }
     });
   }

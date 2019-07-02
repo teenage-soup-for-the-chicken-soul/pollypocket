@@ -6,13 +6,16 @@ import { createBrowserHistory } from "history";
 
 const customHistory = createBrowserHistory();
 
-// import store from './store';
+import store from './store';
 import App from './app';
 import './index.css';
 
 ReactDOM.render(
-  <BrowserRouter history={customHistory}>
+  <Provider store={store}>
+     <BrowserRouter history={customHistory}>
     <App />
-  </BrowserRouter>,
+  </BrowserRouter>
+  </Provider>
+ ,
   document.getElementById('root')
 );

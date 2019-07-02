@@ -22,9 +22,7 @@ async function seed(data, goals = {}) {
         $('body').each(function(i, element) {
           var a = $(this).html()
           couchDB.insert({
-            email: data.email,
-            password: data.password,
-            goals: [].concat(goals)
+            userKey: '7260ed80-9c37-11e9-a4f1-e1ff71ed010e'
           })
         })
       }
@@ -37,10 +35,7 @@ async function runSeed() {
   try {
     await seed(
       {
-        email: 'cody@testmail.com',
-        password: 'test123'
-      },
-      {
+        userKey: 'na7260ed80-9c37-11e9-a4f1-e1ff71ed010e',
         goalId: 2,
         title: 'Fun Article for Frenz',
         articles: [].concat(
@@ -50,10 +45,7 @@ async function runSeed() {
     )
     await seed(
       {
-        email: 'suzieQ@testmail.com',
-        password: 'test123'
-      },
-      {
+        userKey: 'na7260ed80-9c37-11e9-a4f1-e1ff71ed010e',
         goalId: 2,
         title: 'Quiet Time',
         articles: [].concat(
@@ -64,10 +56,7 @@ async function runSeed() {
 
     await seed(
       {
-        email: 'fuzzywuzzy@testmail.com',
-        password: 'test123'
-      },
-      {
+        userKey: 'nan',
         goalId: 1,
         title: 'Teenage Wasteland',
         articles: [].concat(
