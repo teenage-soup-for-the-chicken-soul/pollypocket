@@ -1,16 +1,47 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { getArticlesThunk } from '../store/reducers/articles';
-import { Link } from 'react-router-dom';
-import AddArticleForm from './addArticleForm';
+import React from "react";
+import { connect } from "react-redux";
+import { getArticlesThunk } from "../store/reducers/articles";
+import { Link } from "react-router-dom";
+import AddArticleForm from "./addArticleForm";
+
+//Card import - will be used in single goal view for Tier 2
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+
+const stylesheet = {
+  greaterContainer:{
+ margin: "30px"
+  },
+  container: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, auto [col-start])",
+    gridGap: "50px"
+  },
+  media: {
+    height: 140
+  },
+  addForm:{
+    margin: "60px",
+  },
+  header: {
+    margin: "30px"
+  }
+};
 
 class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      currArticles: [],
+      currArticles: []
     };
   }
+
   async componentDidMount() {
     await this.props.getArticles(this.props.userKey);
     this.setState({ currArticles: this.props.articles });
@@ -22,37 +53,68 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div>
-        <AddArticleForm />
-        <div>Here is our Dashboard</div>
-        {this.state.currArticles.length !== 0 ? (
-          this.state.currArticles.map(article => (
-            <Link
-              to={{
-                pathname: '/article',
-                state: {
-                  currentArticle: article,
-                },
-              }}
-              key={article._id}
-            >
-              {article.title}
-            </Link>
-          ))
-        ) : (
-          <div>No articles</div>
-        )}
+      <div style={stylesheet.greaterContainer}>
+
+        <div style={stylesheet.header}>MY ARTICLES</div>
+        <div style={stylesheet.container}>
+          {this.state.currArticles.length !== 0 ? (
+            this.state.currArticles.map(article => (
+              <Card className="card" width="340">
+                <CardActionArea>
+                  <CardMedia
+                    className="media"
+                    style={stylesheet.media}
+                    image="https://michaeljhealydotcom.files.wordpress.com/2017/04/do-you-read-me-l-ekuvug.jpeg"
+                    title={article.title}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {article.title}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    <Link
+                      to={{
+                        pathname: "/article",
+                        state: {
+                          currentArticle: article
+                        }
+                      }}
+                      key={article._id}
+                    >
+                      Read Now
+                    </Link>
+                  </Button>
+                  <Button size="small" color="primary">
+                    Mark as Read
+                  </Button>
+                  <Button size="small" color="primary">
+                    Delete
+                  </Button>
+                </CardActions>
+              </Card>
+            ))
+          ) : (
+            <div>No articles</div>
+          )}
+        </div>
+        <div style={stylesheet.addForm}>
+           <AddArticleForm />
+           </div>
+
       </div>
     );
   }
 }
 const mapState = state => ({
   articles: state.articles.articles,
-  userKey: state.user.uniqueKey,
+  userKey: state.user.uniqueKey
 });
 
 const mapDispatch = dispatch => ({
-  getArticles: userKey => dispatch(getArticlesThunk(userKey)),
+  getArticles: userKey => dispatch(getArticlesThunk(userKey))
 });
 
 export default connect(

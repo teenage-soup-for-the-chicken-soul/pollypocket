@@ -51,6 +51,7 @@ const createApp = () => {
 
   // Static middleware
   app.use(express.static(path.join(__dirname, '..', 'public')));
+  console.log(path.join(__dirname, '..', 'public'))
 
   // For all GET requests that aren't to an API route,
   // we will send the index.html!
