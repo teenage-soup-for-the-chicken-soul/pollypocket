@@ -6,12 +6,13 @@ import user from './reducers/users'
 import articles from './reducers/articles'
 
 import { persistentStore } from 'redux-pouchdb';
-const db = new PouchDB('articles');
+// const PouchDB = require('pouchdb');
+// const db = new PouchDB('articles');
 
 
 const reducer = combineReducers({user,articles})
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}, persistentStore(db)))
+  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
 const store = createStore(reducer, middleware)
 
