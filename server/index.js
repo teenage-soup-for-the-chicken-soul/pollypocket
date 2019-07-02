@@ -1,19 +1,18 @@
-"use strict";
-const express = require("express");
-const path = require("path");
-const morgan = require("morgan");
+'use strict';
+const express = require('express');
+const path = require('path');
+const morgan = require('morgan');
 const app = express();
 const PORT = 3000;
-
-const session = require("express-session");
-const passport = require("passport");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const db = require("./db");
+const session = require('express-session');
+const passport = require('passport');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const db = require('./db');
 const sessionStore = new SequelizeStore({ db });
-const socketio = require("socket.io");
-const compression = require("compression");
+const socketio = require('socket.io');
+const compression = require('compression');
 
-if (process.env.NODE_ENV !== "production") require("../secrets");
+if (process.env.NODE_ENV !== 'production') require('../secrets');
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id));
@@ -29,7 +28,7 @@ passport.deserializeUser(async (id, done) => {
 
 const createApp = () => {
   // Logging middleware
-  app.use(morgan("dev"));
+  app.use(morgan('dev'));
 
   // Body parsing middleware
   app.use(express.json());
@@ -38,30 +37,30 @@ const createApp = () => {
   app.use(compression());
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || "my best friend is Cody",
+      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
       store: sessionStore,
       resave: false,
-      saveUninitialized: false
+      saveUninitialized: false,
     })
   );
   app.use(passport.initialize());
   app.use(passport.session());
   // for mounting + routes
-  app.use("/routes", require("./routes")); // include our routes!
-  app.use("/auth", require("./auth"));
+  app.use('/routes', require('./routes')); // include our routes!
+  app.use('/auth', require('./auth'));
 
   // Static middleware
-  app.use(express.static(path.join(__dirname, "..", "public")));
+  app.use(express.static(path.join(__dirname, '..', 'public')));
 
   // For all GET requests that aren't to an API route,
   // we will send the index.html!
-  app.get("*", (req, res, next) => {
-    res.sendFile(path.join(__dirname, "..", "public", "index.html"));
+  app.get('*', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
   });
 
   // Handle 404s
   app.use((req, res, next) => {
-    const err = new Error("Not Found");
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
   });
@@ -69,7 +68,7 @@ const createApp = () => {
   // Error handling endware
   app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    res.send(err.message || "Internal server error");
+    res.send(err.message || 'Internal server error');
   });
 };
 
@@ -84,7 +83,7 @@ const startListening = () => {
 
   // set up our socket control center
   const io = socketio(server);
-  require("./socket")(io);
+  require('./socket')(io);
 };
 
 const syncDb = () => db.sync();
