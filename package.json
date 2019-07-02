@@ -26,6 +26,7 @@
     "express": "^4.17.1",
     "express-session": "^1.15.1",
     "history": "^4.9.0",
+    "html-react-parser": "^0.8.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.0",
     "passport": "^0.4.0",
@@ -67,11 +68,10 @@
     "husky": "^2.7.0",
     "nano": "^8.1.0",
     "pouchdb": "^7.1.1",
-    "react-render-html": "^0.6.0",
     "request": "^2.88.0",
     "style-loader": "^0.23.1",
     "webpack": "^3.9.1",
-    "webpack-dev-server": "^2.9.5",
+    "webpack-dev-server": ">=3.1.11",
     "webpack-node-externals": "^1.7.2"
   }
 }

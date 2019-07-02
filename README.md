@@ -32,7 +32,7 @@ This script will start the application
 npm run start-dev
 ```
 
-checkout out localhost:5001
+checkout out localhost:3000
 
 ## Running the tests
 

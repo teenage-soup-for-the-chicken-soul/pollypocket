@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { renderHTML } from 'react-render-html';
+import parse from 'html-react-parser';
 
 export default class IndArticle extends Component {
   constructor() {
@@ -15,13 +15,14 @@ export default class IndArticle extends Component {
   }
   render() {
     const art = this.state.article;
+    console.log(typeof art.linkData);
     return (
       <div>
         <button type="button">Back Btn</button>
         <div>
           <h2>{art.title}</h2>
           {/* <h4>Author by line</h4> */}
-          <div> {renderHTML(art.linkData)}</div>
+          {parse(String(art.linkData))}
         </div>
       </div>
     );
