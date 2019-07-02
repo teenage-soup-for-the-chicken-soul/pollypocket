@@ -1,36 +1,17 @@
-// import React from 'react';
-// import { NavLink } from 'react-router-dom';
-// import AppBar from '@material-ui/core/AppBar';
-
-// const Navbar = () => {
-//   return (
-//     <div>
-//       <AppBar position="static" color="default">
-//         <nav>
-//           <NavLink to="/">HomeLogo</NavLink>
-//           <NavLink to="/">Sign In</NavLink>
-//           <NavLink to="/">Sign Up</NavLink>
-//         </nav>
-//       </AppBar>
-//     </div>
-//   );
-// };
-// export default Navbar;
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logout } from '../store';
 import AppBar from '@material-ui/core/AppBar';
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
+const Navbar = ({ handleClick, isLoggedIn }) => (
+  <AppBar>
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+          <NavLink to="/">Home</NavLink>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
@@ -38,38 +19,40 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/signup">Sign Up</NavLink>
         </div>
       )}
     </nav>
-    <hr />
-  </div>
-)
+  </AppBar>
+);
 
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
-  }
-}
+    isLoggedIn: !!state.user.id,
+  };
+};
 
 const mapDispatch = dispatch => {
   return {
     handleClick() {
-      dispatch(logout())
-    }
-  }
-}
+      dispatch(logout());
+    },
+  };
+};
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(
+  mapState,
+  mapDispatch
+)(Navbar);
 
 /**
  * PROP TYPES
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
+  isLoggedIn: PropTypes.bool.isRequired,
+};
