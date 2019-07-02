@@ -46,7 +46,7 @@ class LogInDialogBox extends React.Component {
 
     return (
       <Dialog open={this.state.open} onClose={this.handleClose}>
-        <DialogTitle>Sign Up</DialogTitle>
+        <DialogTitle>Login Up</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Fill out this form to get started!
