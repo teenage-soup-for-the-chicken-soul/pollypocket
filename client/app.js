@@ -7,7 +7,11 @@ const App = () => {
   return (
     <div>
       <Navbar />
+      <br />
+      <br />
       <Routes />
+      <br />
+      <br />
       <Footer />
     </div>
   );

@@ -2,7 +2,6 @@
   "name": "pollypocket",
   "version": "1.0.0",
   "description": "capstone project",
-  "main": "main.js",
   "scripts": {
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "build-client-watch": "webpack -w",
@@ -27,6 +26,7 @@
     "express": "^4.17.1",
     "express-session": "^1.15.1",
     "history": "^4.9.0",
+    "html-react-parser": "^0.8.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.0",
     "passport": "^0.4.0",
@@ -63,7 +63,6 @@
     "husky": "^2.7.0",
     "nano": "^8.1.0",
     "pouchdb": "^7.1.1",
-    "react-render-html": "^0.6.0",
     "request": "^2.88.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.16.4",

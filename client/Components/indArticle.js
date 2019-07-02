@@ -1,33 +1,30 @@
 import React, { Component } from 'react';
-import renderHTML from 'react-render-html';
+import parse from 'html-react-parser';
 
 export default class IndArticle extends Component {
-  constructor(){
-    super()
-    this.state={
-      article: {}
-    }
+  constructor() {
+    super();
+    this.state = {
+      article: {},
+    };
   }
 
-
-  componentDidMount(){
-   const {currentArticle} = this.props.location.state
-   console.log("this is the current Article", currentArticle)
-   this.setState({article: currentArticle})
+  componentDidMount() {
+    const { currentArticle } = this.props.location.state;
+    this.setState({ article: currentArticle });
   }
   render() {
-    const art = this.state.article
-    console.log("this is art",art.linkData)
+    const art = this.state.article;
+    console.log(typeof art.linkData);
     return (
       <div>
         <button type="button">Back Btn</button>
         <div>
           <h2>{art.title}</h2>
           {/* <h4>Author by line</h4> */}
-          <div> {renderHTML(art.articleURL)}</div>
+          {parse(String(art.linkData))}
         </div>
       </div>
-
     );
   }
 }
