@@ -59,12 +59,14 @@ router.post('/', async (req, res, next) => {
 // });
 
 // DELETE ROUTES || DESTROY
-// router.delete('/:id', async (req, res, next) => {
-//   try {
-//     res.send({ message: 'Deleted successfully' });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+router.delete('/delete', async (req, res, next) => {
+  try {
+    console.log(req.params.id)
+    articles.remove(req.params.id, req.params.rev)
+    res.send({ message: 'Deleted successfully' });
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;
