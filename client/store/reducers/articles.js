@@ -4,7 +4,16 @@ import db from '../../db';
 
 export const GET_ARTICLES = 'GET_ARTICLES';
 export const ADD_ARTICLE = 'ADD_ARTICLE';
+
 export const GET_GOALS = 'GET_GOALS';
+
+export const DELETE_ARTICLE = 'DELETE_ARTICLE';
+
+export const deleteArticle = (articleId) => ({
+  type: DELETE_ARTICLE,
+  articleId
+});
+
 
 export const getArticles = articles => ({
   type: GET_ARTICLES,
@@ -39,6 +48,7 @@ export const addArticleThunk = obj => async dispatch => {
   }
 };
 
+
 export const getGoalsThunk = userKey => async dispatch => {
   try {
     let currentdb = await new db('articles');
@@ -61,6 +71,27 @@ export const addGoalThunk = obj => async dispatch => {
     console.log('Error adding new goal in thunk', error);
   }
 };
+
+export const deleteArticleThunk = (article) => async dispatch => {
+  try {
+
+let currentdb = await new db('articles');
+await currentdb.remove(article, function(err) {
+  if (err) {
+     return console.log(err);
+  } else {
+     console.log("Document deleted successfully");
+  }
+  })
+await currentdb.createDBIndex();
+    const res = await currentdb.findArticle(article.userKey);
+    dispatch(getArticles(res.docs));
+  } catch (error) {
+  console.log('Error in the delete thunk', error)
+  }
+
+}
+
 
 const initialState = {
   articles: [],
