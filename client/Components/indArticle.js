@@ -15,12 +15,17 @@ export default class IndArticle extends Component {
   }
   render() {
     const art = this.state.article;
-    console.log(typeof art.linkData);
+    console.log(art.linkCSS);
+    let cssLink = document.createElement('link');
+    cssLink.href = art.linkCSS;
+    cssLink.rel = 'stylesheet';
+    console.log(cssLink);
+    document.head.appendChild(cssLink);
     return (
       <div>
         <button type="button">Back Btn</button>
         <div>
-          <h2>{art.title}</h2>
+          {/* <h2>{art.title}</h2> */}
           {/* <h4>Author by line</h4> */}
           {parse(String(art.linkData))}
         </div>
