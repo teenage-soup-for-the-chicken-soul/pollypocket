@@ -7,7 +7,7 @@
     "build-client-watch": "webpack -w",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "seed": "node script/postgres-seed.js",
-    "deploy": "npm run seed script/deploy"
+    "deploy": "script/deploy"
   },
   "repository": {
     "type": "git",
