@@ -1,39 +1,38 @@
-import React from "react";
-import { connect } from "react-redux";
-import { getArticlesThunk } from "../store/reducers/articles";
-import { Link } from "react-router-dom";
-import AddArticleForm from "./addArticleForm";
-import {deleteArticleThunk} from "../store/reducers/articles"
-import GoalNavbar from './goalNavbar'
+import React from 'react';
+import { connect } from 'react-redux';
+import { getArticlesThunk } from '../store/reducers/articles';
+import { Link } from 'react-router-dom';
+import AddArticleForm from './addArticleForm';
+import { deleteArticleThunk } from '../store/reducers/articles';
 
 //Card import - will be used in single goal view for Tier 2
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 const stylesheet = {
-  greaterContainer:{
- margin: "30px"
+  greaterContainer: {
+    margin: '30px',
   },
   container: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, auto [col-start])",
-    gridGap: "50px"
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, auto [col-start])',
+    gridGap: '50px',
   },
   media: {
-    height: 140
+    height: 140,
   },
-  addForm:{
-    margin: "60px",
+  addForm: {
+    margin: '60px',
   },
   header: {
-    margin: "30px"
-  }
+    margin: '30px',
+  },
 };
 //snackbar test
 import Snackbar from '@material-ui/core/Snackbar';
@@ -48,7 +47,6 @@ class Dashboard extends React.Component {
     super();
     this.state = {
       currArticles: [],
-
     };
   }
 
@@ -64,19 +62,28 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div style={stylesheet.greaterContainer}>
-       <GoalNavbar/>
         <div style={stylesheet.header}>MY ARTICLES</div>
         <div style={stylesheet.container}>
           {this.state.currArticles.length !== 0 ? (
             this.state.currArticles.map((article, index) => (
-              <Card key={index} className="card" width="340" >
-                <CardActionArea >
-                  <CardMedia
-                    className="media"
-                    style={stylesheet.media}
-                    image="https://michaeljhealydotcom.files.wordpress.com/2017/04/do-you-read-me-l-ekuvug.jpeg"
-                    title={article.title}
-                  />
+              <Card key={index} className="card" width="340">
+                <CardActionArea>
+                  <Link
+                    to={{
+                      pathname: '/article',
+                      state: {
+                        currentArticle: article,
+                      },
+                    }}
+                    key={article._id}
+                  >
+                    <CardMedia
+                      className="media"
+                      style={stylesheet.media}
+                      image={article.image}
+                      title={article.title}
+                    />
+                  </Link>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                       {article.title}
@@ -87,10 +94,10 @@ class Dashboard extends React.Component {
                   <Button size="small" color="primary">
                     <Link
                       to={{
-                        pathname: "/article",
+                        pathname: '/article',
                         state: {
-                          currentArticle: article
-                        }
+                          currentArticle: article,
+                        },
                       }}
                       key={article._id}
                     >
@@ -101,12 +108,14 @@ class Dashboard extends React.Component {
                     Mark as Read
                   </Button>
                   <Button
-                  size="small"
-                   color="primary"
-                   onClick={()=> {this.props.deleteArticle(article)}}>
+                    size="small"
+                    color="primary"
+                    onClick={() => {
+                      this.props.deleteArticle(article);
+                    }}
+                  >
                     Delete
                   </Button>
-
                 </CardActions>
               </Card>
             ))
@@ -115,21 +124,20 @@ class Dashboard extends React.Component {
           )}
         </div>
         <div style={stylesheet.addForm}>
-           <AddArticleForm />
-           </div>
-
+          <AddArticleForm />
+        </div>
       </div>
     );
   }
 }
 const mapState = state => ({
   articles: state.articles.articles,
-  userKey: state.user.uniqueKey
+  userKey: state.user.uniqueKey,
 });
 
 const mapDispatch = dispatch => ({
   getArticles: userKey => dispatch(getArticlesThunk(userKey)),
-  deleteArticle: (id, rev) => dispatch(deleteArticleThunk(id, rev))
+  deleteArticle: (id, rev) => dispatch(deleteArticleThunk(id, rev)),
 });
 
 export default connect(
