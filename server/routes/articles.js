@@ -3,23 +3,70 @@ var request = require('request');
 var cheerio = require('cheerio');
 const nano = require('nano')('http://admin:graceHopper@localhost:5984');
 
-function insertData(obj) {
-  const bodyTest = nano.use('articles');
+async function insertData(obj) {
+  const db = nano.use('articles');
+  let cssURLArr = [];
+
+  let parsedBody;
+  let parsedStyle;
+  let articleTitle;
+  let mainImage;
+
+  //parses the body
   request(obj.articleURL, function(error, response, html) {
-    if (!error && response.statusCode == 200) {
+    if (!error && response.statusCode === 200) {
       var $ = cheerio.load(html);
-      $('body').each(function(i, element) {
-        var a = $(this).html();
-        bodyTest.insert({
-          linkData: a,
-          title: obj.title,
-          articleURL: obj.articleURL,
-          userKey: obj.userKey,
-          goalId: obj.goalId,
-        });
+      parsedBody = $('body').html();
+      request(obj.articleURL, function(error, response, html) {
+        if (!error && response.statusCode === 200) {
+          var $ = cheerio.load(html);
+          $('link[rel="stylesheet"]').each(function(i, element) {
+            cssURLArr.push($(element).attr('href'));
+            
+            //this nest is weird for a forEach
+            
+            request(obj.articleURL, function(error, response, html) {
+              if (!error && response.statusCode === 200) {
+                var $ = cheerio.load(html);
+                articleTitle = $('title').html();
+                request(obj.articleURL, function(error, response, html) {
+                  if (!error && response.statusCode === 200) {
+                    var $ = cheerio.load(html);
+                    mainImage = $('meta[property="og:image"]').attr('content');
+                    console.log(
+                      'deep in a nest of functions...',
+                      mainImage,
+                      articleTitle,
+                      cssURLArr
+                    );
+                  }
+                });
+              }
+            });
+          });
+        }
       });
     }
   });
+
+  //saves css styling
+  // cssURLArr.forEach(elem => {
+  //   request(elem, function(error, response, html) {
+  //     if (!error && response.statusCode === 200) {
+  //       var $ = cheerio.load(html);
+  //       console.log($);
+  //     }
+  //   });
+  // });
+
+  // db.insert({
+  //   linkCSS: parsedStyle,
+  //   linkData: parsedBody,
+  //   title: obj.title,
+  //   articleURL: obj.articleURL,
+  //   userKey: obj.userKey,
+  //   goalId: obj.goalId,
+  // });
 }
 
 // router.get('/', async (req, res, next) => {
