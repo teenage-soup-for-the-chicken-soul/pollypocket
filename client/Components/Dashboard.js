@@ -4,6 +4,7 @@ import { getArticlesThunk } from "../store/reducers/articles";
 import { Link } from "react-router-dom";
 import AddArticleForm from "./addArticleForm";
 import {deleteArticleThunk} from "../store/reducers/articles"
+import GoalNavbar from './goalNavbar'
 
 //Card import - will be used in single goal view for Tier 2
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,6 +40,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
+
 // const [open, setOpen] = React.useState(false);
 
 class Dashboard extends React.Component {
@@ -46,7 +48,7 @@ class Dashboard extends React.Component {
     super();
     this.state = {
       currArticles: [],
-     
+
     };
   }
 
@@ -62,7 +64,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div style={stylesheet.greaterContainer}>
-
+       <GoalNavbar/>
         <div style={stylesheet.header}>MY ARTICLES</div>
         <div style={stylesheet.container}>
           {this.state.currArticles.length !== 0 ? (
