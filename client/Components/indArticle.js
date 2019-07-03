@@ -13,6 +13,7 @@ export default class IndArticle extends Component {
     const { currentArticle } = this.props.location.state;
     this.setState({ article: currentArticle });
   }
+
   render() {
     const art = this.state.article;
     console.log(art.linkCSS);
@@ -23,7 +24,7 @@ export default class IndArticle extends Component {
     document.head.appendChild(cssLink);
     return (
       <div>
-        <button type="button">Back Btn</button>
+          <button type="button">Back Btn</button>
         <div>
           {/* <h2>{art.title}</h2> */}
           {/* <h4>Author by line</h4> */}

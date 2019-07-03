@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getArticlesThunk } from "../store/reducers/articles";
 import { Link } from "react-router-dom";
 import AddArticleForm from "./addArticleForm";
+import {deleteArticleThunk} from "../store/reducers/articles"
 
 //Card import - will be used in single goal view for Tier 2
 import { makeStyles } from "@material-ui/core/styles";
@@ -33,12 +34,19 @@ const stylesheet = {
     margin: "30px"
   }
 };
+//snackbar test
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
+// const [open, setOpen] = React.useState(false);
 
 class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      currArticles: []
+      currArticles: [],
+     
     };
   }
 
@@ -58,9 +66,9 @@ class Dashboard extends React.Component {
         <div style={stylesheet.header}>MY ARTICLES</div>
         <div style={stylesheet.container}>
           {this.state.currArticles.length !== 0 ? (
-            this.state.currArticles.map(article => (
-              <Card className="card" width="340">
-                <CardActionArea>
+            this.state.currArticles.map((article, index) => (
+              <Card key={index} className="card" width="340" >
+                <CardActionArea >
                   <CardMedia
                     className="media"
                     style={stylesheet.media}
@@ -90,9 +98,13 @@ class Dashboard extends React.Component {
                   <Button size="small" color="primary">
                     Mark as Read
                   </Button>
-                  <Button size="small" color="primary">
+                  <Button
+                  size="small"
+                   color="primary"
+                   onClick={()=> {this.props.deleteArticle(article)}}>
                     Delete
                   </Button>
+
                 </CardActions>
               </Card>
             ))
@@ -114,7 +126,8 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-  getArticles: userKey => dispatch(getArticlesThunk(userKey))
+  getArticles: userKey => dispatch(getArticlesThunk(userKey)),
+  deleteArticle: (id, rev) => dispatch(deleteArticleThunk(id, rev))
 });
 
 export default connect(

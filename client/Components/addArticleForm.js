@@ -2,14 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addArticleThunk } from '../store/reducers/articles';
 
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
+
+
+
 class addArticleForm extends React.Component {
   constructor() {
     super();
     this.state = {
       title: '',
       articleURL: '',
-      goalId: 1,
+      goals: [],
       userKey: '',
+      open: false
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleFindArticles = this.handleFindArticles.bind(this);
@@ -61,17 +70,44 @@ class addArticleForm extends React.Component {
           <button
             type="button"
             value="Submit"
-            onClick={() => this.handleClick(this.state)}
+            onClick={() => {
+              this.handleClick(this.state)
+              this.setState({open: true})
+            }}
           >
             Submit
           </button>
+          <div>
+      {this.state.open ?
+            <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            open={open}
+            autoHideDuration={6000}
+
+            ContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            message={<span id="message-id">Article Added!</span>}
+            action={[
+            ,
+              <IconButton
+                key="close"
+                aria-label="Close"
+                color="inherit"
+                className="close"
+                onClick={()=> {this.setState({open: false})}}
+              >
+                <CloseIcon />
+              </IconButton>,
+            ]}
+          /> : <div></div>}
+
+    </div>
         </form>
-        <button
-          type="button"
-          onClick={() => this.handleFindArticles(this.state.userKey)}
-        >
-          Find Articles By User
-        </button>
+
       </div>
     );
   }

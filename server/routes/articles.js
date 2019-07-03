@@ -1,7 +1,10 @@
 const router = require('express').Router();
 var request = require('request');
 var cheerio = require('cheerio');
-const nano = require('nano')('http://admin:graceHopper@localhost:5984');
+const nano = require('nano')
+nano(process.env.COUCHDB_URL || 'http://127.0.0.1:5984');
+
+// ('http://admin:graceHopper@localhost:5984');
 
 //POSTS NEW ARTICLE WITH CHEERIO
 function insertData(obj) {
@@ -14,6 +17,7 @@ function insertData(obj) {
   request(obj.articleURL, function(error, response, html) {
     if (!error && response.statusCode === 200) {
       var $ = cheerio.load(html);
+
       parsedBody = $('body').html();
       articleTitle = $('title').html();
       mainImage = $('meta[property="og:image"]').attr('content');

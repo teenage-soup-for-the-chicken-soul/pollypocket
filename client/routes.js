@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Login, Signup, UserHome, IndArticle, Home } from './Components';
+import {
+  Login,
+  Signup,
+  UserHome,
+  IndArticle,
+  Home,
+  AddGoalPop,
+  AddGoalTest
+} from './Components';
 import { me } from './store/reducers/users';
 
 class Routes extends Component {
@@ -24,6 +32,8 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/article" component={IndArticle} />
+            <Route path="/addGoal" component={AddGoalPop} />
+            <Route path="/goalTest" component={AddGoalTest} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
