@@ -16,7 +16,6 @@ export default class IndArticle extends Component {
 
   render() {
     const art = this.state.article;
-    console.log(art.linkCSS);
     let cssLink = document.createElement('link');
     cssLink.href = art.linkCSS;
     cssLink.rel = 'stylesheet';
