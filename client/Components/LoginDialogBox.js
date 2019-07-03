@@ -32,10 +32,9 @@ class LogInDialogBox extends React.Component {
   }
   handleClose() {
     this.setOpen(false);
-    this.props.history.push('/')
+    this.props.history.push('/');
   }
   handleComplete() {
-    console.log(this.state);
     this.props.auth(this.state.email, this.state.password, 'login');
     this.setState({ email: '', password: '' });
     this.setOpen(false);
@@ -67,6 +66,8 @@ class LogInDialogBox extends React.Component {
             value={this.state.password}
             autoFocus
             fullWidth
+            type="password"
+            autoComplete="current-password"
             id="password"
             label="Password"
             required={true}

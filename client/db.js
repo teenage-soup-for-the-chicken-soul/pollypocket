@@ -21,7 +21,54 @@ export default class DB {
 
   // ARTICLE METHODS
   async createDBIndex() {
-    this.db.createIndex({ index: { fields: ['userKey'] } });
+    this.db.createIndex({ index: { fields: ['userKey', 'goals'] } });
+  }
+
+  findGoals(inputUserId) {
+    return this.db
+      .find({
+        selector: { userKey: { $eq: inputUserId }, goals: { $gt: null } },
+      })
+      .then(function(result, err) {
+        if (!err) {
+          console.log('successfully found goals by user', result);
+          return result;
+        } else {
+          console.log('this is the error', err);
+        }
+      });
+  }
+
+  addGoal(obj) {
+    let newGoal = {
+      userKey: obj.userKey,
+      goals: obj.goals,
+    };
+    let currDoc = this.db
+      .find({
+        selector: { userKey: { $eq: obj.userKey }, goals: { $gt: null } },
+      })
+      .then(function(result, err) {
+        if (!err) {
+          console.log('successfully in goals  by user', result);
+          return result;
+        } else {
+          console.log('this is the error', err);
+        }
+      });
+    console.log(currDoc);
+    this.db.put(doc); // initial put
+    db.get('test')
+      .then(function(doc) {
+        doc.results[doc.results.length] = 44; // modify it here instead
+        return db.put(doc);
+      })
+      .then(function() {
+        return db.get('test');
+      })
+      .then(function(doc) {
+        console.log(doc);
+      });
   }
 
   async getArticlesByUser(userId) {
@@ -33,24 +80,6 @@ export default class DB {
   async getAllArticles(id) {
     let allArticles = await this.db.get(id).then(function(doc) {
       console.log(doc);
-    });
-  }
-
-  async addArticle(obj) {
-    let newArticle = {
-      _id: new Date().toISOString(),
-      articleTitle: obj.articleTitle,
-      articleURL: obj.articleUrl,
-      userKey: obj.userId,
-      goalId: obj.goalId,
-    };
-    console.log('the object being put into db', newArticle);
-    this.db.put(newArticle).then(function(err, result) {
-      if (!err) {
-        console.log('Successfully added a article!');
-      } else {
-        console.log(err);
-      }
     });
   }
 

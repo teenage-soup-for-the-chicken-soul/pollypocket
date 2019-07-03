@@ -8,6 +8,24 @@ function insertData(obj) {
   request(obj.articleURL, function(error, response, html) {
     if (!error && response.statusCode == 200) {
       var $ = cheerio.load(html);
+      let styles = [];
+      $('head').each((i, el) => {
+    
+        el.children.forEach((child, i) => {
+          if(child.type === 'style' && child.children.length) {
+            let nodes = [];
+            child.children.forEach((node, i) => {
+              if(node.type === 'text') {
+                console.log("HIT", node)
+                nodes.push(node.data)
+              }
+            })
+            styles.concat(nodes)
+          }
+        })
+        
+      });
+      console.log("STYLE TAGS", styles)
       $('body').each(function(i, element) {
         var a = $(this).html();
         bodyTest.insert({

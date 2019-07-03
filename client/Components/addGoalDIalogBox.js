@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,16 +6,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { auth } from '../store/reducers/users';
 import TextField from '@material-ui/core/TextField';
+import { getGoalsThunk, addGoalThunk } from '../store/reducers/articles';
 
-class SignUpDialogBox extends React.Component {
+class AddGoalPop extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
+      goals: [],
+      goalTitle: '',
       open: true,
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -23,7 +22,9 @@ class SignUpDialogBox extends React.Component {
     this.setOpen = this.setOpen.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
   }
-  // const [open, setOpen] = React.useState(true);
+  componentDidMount() {
+    this.setState({ goals: this.props.goals });
+  }
   setOpen(bool) {
     this.setState({ open: bool });
   }
@@ -32,48 +33,48 @@ class SignUpDialogBox extends React.Component {
   }
   handleClose() {
     this.setOpen(false);
-    this.props.history.push('/');
+    this.props.history.goBack();
   }
   handleComplete() {
-    this.props.auth(this.state.email, this.state.password, 'signup');
-    this.setState({ email: '', password: '' });
+    if (this.state.goalTitle.length !== 0) {
+      let newGoalId;
+      if (this.state.goals.length > 0) {
+        newGoalId = this.state.goals[this.state.goals.length - 1].goalId + 1;
+      } else {
+        newGoalId = 1;
+      }
+      const newGoal = {
+        userKey: this.props.userKey,
+        goalTitle: this.state.goalTitle,
+        goalId: newGoalId,
+      };
+      let newGoalArr = this.state.goals.push(newGoal);
+      this.props.addGoalThunk(newGoalArr);
+      this.setState({ goalTitle: '' });
+      this.history.goBack();
+    }
     if (!this.props.error) {
       this.setOpen(false);
     }
   }
 
   render() {
-    const disabled = !this.state.email.length && !this.state.password.length;
+    const disabled = !this.state.goalTitle.length;
 
     return (
       <Dialog open={this.state.open} onClose={this.handleClose}>
-        <DialogTitle>Sign Up</DialogTitle>
+        <DialogTitle>Add Goal</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Fill out this form to get started!
-          </DialogContentText>
+          <DialogContentText>Add a new goal</DialogContentText>
           <TextField
             margin="normal"
-            value={this.state.email}
+            value={this.state.goalTitle}
             autoFocus
             fullWidth
-            id="email"
-            label="Email"
+            id="goalTitle"
+            label="Goal Title"
             required={true}
-            onChange={event => this.setState({ email: event.target.value })}
-          />
-          <br />
-          <TextField
-            margin="normal"
-            value={this.state.password}
-            autoFocus
-            fullWidth
-            id="password"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            required={true}
-            onChange={event => this.setState({ password: event.target.value })}
+            onChange={event => this.setState({ goalTitle: event.target.value })}
           />
           <br />
           {this.props.error && this.props.error.response && (
@@ -89,7 +90,7 @@ class SignUpDialogBox extends React.Component {
             onClick={this.handleComplete}
             color="primary"
           >
-            Sign Up
+            Add Goal
           </Button>
         </DialogActions>
       </Dialog>
@@ -99,27 +100,17 @@ class SignUpDialogBox extends React.Component {
 
 const mapSignup = state => {
   return {
-    name: 'signup',
-    displayName: 'Sign Up',
-    error: state.user.error,
+    goals: state.articles.goals,
+    userKey: state.user.uniqueKey,
   };
 };
 
 const mapDispatch = dispatch => ({
-  auth: (email, password, formName) =>
-    dispatch(auth(email, password, formName)),
+  getGoalsThunk: userKey => dispatch(getGoalsThunk(userKey)),
+  addGoalThunk: obj => dispatch(addGoalThunk(obj)),
 });
 
 export default connect(
   mapSignup,
   mapDispatch
-)(SignUpDialogBox);
-
-/**
- * PROP TYPES
- */
-SignUpDialogBox.propTypes = {
-  name: PropTypes.string.isRequired,
-  displayName: PropTypes.string.isRequired,
-  error: PropTypes.object,
-};
+)(AddGoalPop);

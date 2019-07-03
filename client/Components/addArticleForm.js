@@ -16,7 +16,7 @@ class addArticleForm extends React.Component {
     this.state = {
       title: '',
       articleURL: '',
-      goalId: 1,
+      goals: [],
       userKey: '',
       open: false
     };
