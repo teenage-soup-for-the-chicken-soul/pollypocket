@@ -1,8 +1,12 @@
- // Called when the user clicks on the browser action.
-// chrome.browserAction.onClicked.addListener(function(tab) {
-//   // Send a message to the active tab
-//   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//     var activeTab = tabs[0];
-//     chrome.tabs.sendMessage(activeTab.id, {"message": "clicked_browser_action"});
-//   });
-// })
+const options = {
+  type: 'basic',
+  iconUrl: 'icon16.png',
+  title: "This is a notification",
+  message: "Sucessfully added an article!"
+}
+
+chrome.notifications.create(options, callback)
+
+function callback(){
+  console.log("Popup done!")
+}
