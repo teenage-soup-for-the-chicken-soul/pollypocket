@@ -2,13 +2,15 @@ import axios from 'axios';
 import history from '../../history';
 import db from '../../db';
 
+
+// ACTION TYPES
 export const GET_ARTICLES = 'GET_ARTICLES';
 export const ADD_ARTICLE = 'ADD_ARTICLE';
-
 export const GET_GOALS = 'GET_GOALS';
-
 export const DELETE_ARTICLE = 'DELETE_ARTICLE';
 
+
+// ACTION CREATORS
 export const deleteArticle = (articleId) => ({
   type: DELETE_ARTICLE,
   articleId
@@ -25,6 +27,8 @@ export const getGoals = goals => ({
   goals,
 });
 
+
+// THUNKS
 export const getArticlesThunk = userKey => async dispatch => {
   try {
     let currentdb = await new db('articles');
@@ -38,7 +42,7 @@ export const getArticlesThunk = userKey => async dispatch => {
 
 export const addArticleThunk = obj => async dispatch => {
   try {
-    await axios.post('/routes/articles', obj);
+    await axios.post('/api/articles', obj);
     let currentdb = await new db('articles');
     await currentdb.createDBIndex();
     const res = await currentdb.findArticle(obj.userKey);

@@ -7,10 +7,11 @@ import {
   Signup,
   UserHome,
   IndArticle,
+  AddArticleForm,
   Home,
   AddGoalPop,
   AddGoalTest
-} from './Components';
+} from './components';
 import { me } from './store/reducers/users';
 
 class Routes extends Component {
@@ -31,7 +32,8 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
-            <Route path="/article" component={IndArticle} />
+            <Route exact path="/article" component={IndArticle} />
+            <Route exact path="/article/add" component={AddArticleForm}/>
             <Route path="/addGoal" component={AddGoalPop} />
             <Route path="/goalTest" component={AddGoalTest} />
           </Switch>

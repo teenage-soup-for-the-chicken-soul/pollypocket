@@ -6,11 +6,12 @@
 export { default as Home } from './home';
 export { default as Navbar } from './navbar';
 export { default as Footer } from './footer';
-export { default as UserHome } from './Dashboard';
+export { default as UserHome } from './dashboard';
 export { default as IndArticle } from './indArticle';
-export { default as Signup } from './SignUpDialogBox';
-export { default as Login } from './LoginDialogBox';
+export { default as Signup } from './signUpDialogBox';
+export { default as Login } from './loginDialogBox';
 export { default as AddGoalPop } from './addGoalDIalogBox';
 export { default as AddGoalTest } from './testingAddGoal';
+export { default as AddArticleForm } from './addArticleForm';
 
 // export { Login } from './authForm';
