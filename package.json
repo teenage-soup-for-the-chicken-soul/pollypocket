@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "capstone project",
   "scripts": {
+    "start": "node server",
+    "heroku-token": "script/encrypt-heroku-auth-token",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "build-client-watch": "webpack -w",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
