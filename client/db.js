@@ -21,7 +21,8 @@ export default class DB {
 
   // ARTICLE METHODS
   async createDBIndex() {
-    this.db.createIndex({ index: { fields: ['userKey', 'goals'] } });
+    this.db.createIndex({ index: { fields: ['userKey', 'goals', '_id'] } });
+
   }
 
   findGoals(inputUserId) {
@@ -112,6 +113,14 @@ export default class DB {
           console.log('this is the error', err);
         }
       });
+  }
+
+  deleteArticle(article){
+   this.db.remove(article);
+    
+
+
+
   }
 
   // USER METHODS

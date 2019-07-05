@@ -1,6 +1,9 @@
 import axios from 'axios';
 import history from '../../history';
 import db from '../../db';
+import PouchDB from 'pouchDB'
+import Find from 'pouchdb-find';
+PouchDB.plugin(Find);
 
 
 // ACTION TYPES
@@ -78,19 +81,14 @@ export const addGoalThunk = obj => async dispatch => {
 
 export const deleteArticleThunk = (article) => async dispatch => {
   try {
+    let currentdb = await new db('articles');
+    await currentdb.deleteArticle(article)
 
-let currentdb = await new db('articles');
-await currentdb.remove(article, function(err) {
-  if (err) {
-     return console.log(err);
-  } else {
-     console.log("Document deleted successfully");
-  }
-  })
-await currentdb.createDBIndex();
+     await currentdb.createDBIndex();
     const res = await currentdb.findArticle(article.userKey);
     dispatch(getArticles(res.docs));
-  } catch (error) {
+  }
+  catch (error) {
   console.log('Error in the delete thunk', error)
   }
 
