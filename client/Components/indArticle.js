@@ -6,27 +6,42 @@ export default class IndArticle extends Component {
     super();
     this.state = {
       article: {},
+      stylingElem: [],
     };
   }
 
   componentDidMount() {
     const { currentArticle } = this.props.location.state;
     this.setState({ article: currentArticle });
+    if (this.props.location.state.currentArticle.linkCSS.length) {
+      this.props.location.state.currentArticle.linkCSS.forEach(link => {
+        let indLink = document.createElement('link');
+        indLink.href = link;
+        indLink.rel = 'stylesheet';
+        document.head.appendChild(indLink);
+        this.state.stylingElem.push(indLink);
+      });
+    }
+    if (this.props.location.state.currentArticle.styleCss.length) {
+      this.props.location.state.currentArticle.styleCss.forEach(style => {
+        let indStyle = document.createElement('style');
+        indStyle.innerText = style;
+        document.head.append(indStyle);
+        this.state.stylingElem.push(indStyle);
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this.state.stylingElem.forEach(tag => tag.remove());
   }
 
   render() {
     const art = this.state.article;
-    let cssLink = document.createElement('link');
-    cssLink.href = art.linkCSS;
-    cssLink.rel = 'stylesheet';
-    console.log(cssLink);
-    document.head.appendChild(cssLink);
     return (
       <div>
-          <button type="button">Back Btn</button>
+        <button type="button">Back Btn</button>
         <div>
-          {/* <h2>{art.title}</h2> */}
-          {/* <h4>Author by line</h4> */}
           {parse(String(art.linkData))}
         </div>
       </div>
