@@ -1,6 +1,4 @@
 const router = require('express').Router();
-var request = require('request');
-var cheerio = require('cheerio');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const nano = require('nano')(
