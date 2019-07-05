@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const session = require('express-session');
 const passport = require('passport');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -51,7 +51,7 @@ const createApp = () => {
 
   // Static middleware
   app.use(express.static(path.join(__dirname, '..', 'public')));
-  console.log(path.join(__dirname, '..', 'public'))
+  console.log(path.join(__dirname, '..', 'public'));
 
   // For all GET requests that aren't to an API route,
   // we will send the index.html!
