@@ -2,6 +2,10 @@
   "name": "pollypocket",
   "version": "1.0.0",
   "description": "capstone project",
+  "engines": {
+    "node": "10.x"
+  },
+  "main": "index.js",
   "scripts": {
     "start": "node server",
     "heroku-token": "script/encrypt-heroku-auth-token",
