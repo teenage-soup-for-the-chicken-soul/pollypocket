@@ -6,7 +6,7 @@ export default class DB {
   constructor(name) {
     // set up the remote pouchdb and local and sync
     const remotedb = new PouchDB(
-      `http://admin:graceHopper@localhost:5984/${name}`
+      `${process.env.COUCHDB_URL}${name}`
     );
     console.log('Remote database created Successfully.');
     this.db = new PouchDB(name, { skip_setup: true });
