@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 body {
   font-family: sans-serif;
 }
@@ -21,9 +20,35 @@ form div {
   margin: 1em;
   display: inline-block;
 }
-=======
-some styling
->>>>>>> proofOfConcept/master
-=======
-some styling
->>>>>>> proofOfConcept/master
+
+
+.nav-welcome{
+  text-decoration: none;
+  color: #FFF;
+}
+
+.form-add-article{
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 2px solid #FFF;
+  padding: 2rem
+}
+
+input{
+  display: block;
+  width: 80%;
+}
+
+.submit-btn{
+  border: 0;
+  background: #0D0221;
+  padding: .5rem;
+  color: #FFF;
+  width: auto;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.submit-btn:hover{
+  background: #3F51B5;
+}

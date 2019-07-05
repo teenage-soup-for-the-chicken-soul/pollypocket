@@ -46,7 +46,7 @@ const createApp = () => {
   app.use(passport.initialize());
   app.use(passport.session());
   // for mounting + routes
-  app.use('/routes', require('./routes')); // include our routes!
+  app.use('/api', require('./api')); // include our routes!
   app.use('/auth', require('./auth'));
 
   // Static middleware

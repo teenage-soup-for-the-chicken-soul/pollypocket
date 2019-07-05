@@ -2,7 +2,19 @@ const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+
+// ROUTE PROTECTION
+
+const isAuth = (req, res, next) => {
+  if (!req.session.userId) {
+    res.status(401).send({message: 'YOU SHALL NOT PASS'})
+  } else {
+    next()
+  }
+}
+
+
+router.get('/', isAuth, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though

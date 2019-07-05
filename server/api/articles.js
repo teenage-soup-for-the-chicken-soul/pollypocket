@@ -1,10 +1,9 @@
 const router = require('express').Router();
 var request = require('request');
 var cheerio = require('cheerio');
-const nano = require('nano')
-nano(process.env.COUCHDB_URL || 'http://127.0.0.1:5984');
+const nano = require('nano')('http://admin:graceHopper@localhost:5984')
+// nano(process.env.COUCHDB_URL || 'http://127.0.0.1:5984');
 
-// ('http://admin:graceHopper@localhost:5984');
 
 //POSTS NEW ARTICLE WITH CHEERIO
 function insertData(obj) {
@@ -30,7 +29,7 @@ function insertData(obj) {
         image: mainImage,
         linkCSS: cssURLArr,
         linkData: parsedBody,
-        articleURL: obj.articleURL,
+        articleURL: localStorage.getItem('articleUrl') || obj.articleUrl
         goalId: obj.goalId,
       });
       console.log('new article posted');
@@ -42,6 +41,7 @@ function insertData(obj) {
 
 router.post('/', async (req, res, next) => {
   try {
+    // const {userKey, goalId} = req.body
     await insertData(req.body);
     res.status(201).send('Success, Article Added!');
   } catch (e) {
