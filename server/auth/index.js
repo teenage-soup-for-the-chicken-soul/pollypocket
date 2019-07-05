@@ -39,6 +39,11 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
+  if(req.user){
+    req.session.userId = req.user.id
+  } else {
+    req.session.userId = null
+  }
   res.json(req.user)
 })
 

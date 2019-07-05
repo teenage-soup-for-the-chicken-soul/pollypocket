@@ -10,7 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 
 
-class addArticleForm extends React.Component {
+class AddArticleForm extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -36,7 +36,7 @@ class addArticleForm extends React.Component {
   render() {
     return (
       <div>
-        <form>
+        <form className="form-add-article">
           Article Title:
           <br />
           <input
@@ -65,17 +65,19 @@ class addArticleForm extends React.Component {
           <br />
           <br />
           <button
+            className="submit-btn"
             type="button"
             value="Submit"
             onClick={() => {
               this.handleClick(this.state)
               this.setState({open: true})
+              this.props.history.push('/home')
             }}
           >
             Submit
           </button>
           <div>
-      {this.state.open ?
+           {this.state.open ?
             <Snackbar
             anchorOrigin={{
               vertical: 'bottom',
@@ -101,10 +103,8 @@ class addArticleForm extends React.Component {
               </IconButton>,
             ]}
           /> : <div></div>}
-
-    </div>
+        </div>
         </form>
-
       </div>
     );
   }
@@ -121,4 +121,4 @@ const mapDispatch = dispatch => ({
 export default connect(
   mapState,
   mapDispatch
-)(addArticleForm);
+)(AddArticleForm);

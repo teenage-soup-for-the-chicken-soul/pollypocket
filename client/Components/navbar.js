@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { logout } from '../store';
 import AppBar from '@material-ui/core/AppBar';
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, email }) => (
   <AppBar>
     <nav>
       {isLoggedIn ? (
@@ -15,6 +15,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          <a className="nav-welcome" href="#">Welcome, {email.split("@")[0]}!</a>
         </div>
       ) : (
         <div>
@@ -33,6 +34,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
+    email: state.user.email
   };
 };
 
@@ -55,4 +57,5 @@ export default connect(
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  email: PropTypes.string
 };

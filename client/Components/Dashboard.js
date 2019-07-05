@@ -27,8 +27,8 @@ const stylesheet = {
   media: {
     height: 140,
   },
-  addForm: {
-    margin: '60px',
+  addBtn: {
+    margin: '30px',
   },
   header: {
     margin: '30px',
@@ -104,7 +104,7 @@ class Dashboard extends React.Component {
                       Read Now
                     </Link>
                   </Button>
-                  <Button size="small" color="primary">
+                  <Button variant="contained" size="small" color="primary">
                     Mark as Read
                   </Button>
                   <Button
@@ -120,11 +120,12 @@ class Dashboard extends React.Component {
               </Card>
             ))
           ) : (
-            <div>No articles</div>
+            <div style={stylesheet.addBtn}>
+              <Button href="/article/add" variant="contained" size="small" color="primary">
+                Add A Article
+              </Button>
+            </div>
           )}
-        </div>
-        <div style={stylesheet.addForm}>
-          <AddArticleForm />
         </div>
       </div>
     );
