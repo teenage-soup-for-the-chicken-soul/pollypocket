@@ -55,6 +55,7 @@ function insertData(obj) {
 
 router.post('/', async (req, res, next) => {
   try {
+    // const {userKey, goalId} = req.body
     await insertData(req.body);
     res.status(201).send('Success, Article Added!');
   } catch (e) {

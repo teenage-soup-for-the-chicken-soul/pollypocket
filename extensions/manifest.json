@@ -6,7 +6,7 @@
       "128": "icon128.png",
       "16": "icon16.png"
     },
-    "permissions": ["storage", "activeTab"],
+    "permissions": ["storage", "notifications"],
     "content_scripts": [ {
       "matches": ["<all_urls>"],
       "js": ["jquery.min.js", "content.js"]
@@ -15,6 +15,7 @@
     "manifest_version": 2,
     "browser_action": {
         "default_title": "PollyPocket Extension",
-        "default_icon": "icon128.png"
+        "default_icon": "icon128.png",
+        "default_popup": "background.html"
     }
 }

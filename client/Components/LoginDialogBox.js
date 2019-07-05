@@ -23,7 +23,6 @@ class LogInDialogBox extends React.Component {
     this.setOpen = this.setOpen.bind(this);
     this.handleComplete = this.handleComplete.bind(this);
   }
-  // const [open, setOpen] = React.useState(true);
   setOpen(bool) {
     this.setState({ open: bool });
   }
@@ -73,6 +72,10 @@ class LogInDialogBox extends React.Component {
             required={true}
             onChange={event => this.setState({ password: event.target.value })}
           />
+          <Button href="/auth/google" variant="contained" color="primary" fullWidth aria-label="Full width button group">
+              <img src="/assets/images/google.png" alt="google-icon" height="22" width="22"/>
+                Sign In with Google
+          </Button>
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleClose} color="primary">
