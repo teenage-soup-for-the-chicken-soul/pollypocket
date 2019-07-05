@@ -3,8 +3,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
-const nano = require('nano')('http://admin:graceHopper@localhost:5984');
-// nano(process.env.COUCHDB_URL || 'http://127.0.0.1:5984');
+const nano = require('nano')(process.env.COUCHDB_URL || 'http://127.0.0.1:5984');
 
 //POSTS NEW ARTICLE WITH JSDOM
 function insertData(obj) {
