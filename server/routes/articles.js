@@ -1,8 +1,8 @@
 const router = require('express').Router();
 var request = require('request');
 var cheerio = require('cheerio');
-const nano = require('nano')
-nano(process.env.COUCHDB_URL || 'http://127.0.0.1:5984');
+const nano = require('nano')("http://admin:graceHopper@localhost:5984")
+// nano(process.env.COUCHDB_URL || 'http://127.0.0.1:5984');
 
 // ('http://admin:graceHopper@localhost:5984');
 
