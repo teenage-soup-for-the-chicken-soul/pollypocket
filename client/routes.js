@@ -34,8 +34,6 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route exact path="/article" component={IndArticle} />
             <Route exact path="/article/add" component={AddArticleForm}/>
-            <Route path="/addGoal" component={AddGoalPop} />
-            <Route path="/goalTest" component={AddGoalTest} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

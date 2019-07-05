@@ -1,13 +1,14 @@
 import PouchDB from 'pouchDB';
-import Find from 'pouchdb-find';
-PouchDB.plugin(Find);
+import find from 'pouchdb-find';
+PouchDB.plugin(find);
 
 export default class DB {
   constructor(name) {
     // set up the remote pouchdb and local and sync
     const remotedb = new PouchDB(
-      `${process.env.COUCHDB_URL}${name}`
+      `http://admin:graceHopper@localhost:5984/${name}`
     );
+    console.log('looking at remotedDB', remotedb);
     console.log('Remote database created Successfully.');
     this.db = new PouchDB(name, { skip_setup: true });
     console.log('Local database created Successfully.');
@@ -21,55 +22,7 @@ export default class DB {
 
   // ARTICLE METHODS
   async createDBIndex() {
-    this.db.createIndex({ index: { fields: ['userKey', 'goals', '_id'] } });
-
-  }
-
-  findGoals(inputUserId) {
-    return this.db
-      .find({
-        selector: { userKey: { $eq: inputUserId }, goals: { $gt: null } },
-      })
-      .then(function(result, err) {
-        if (!err) {
-          console.log('successfully found goals by user', result);
-          return result;
-        } else {
-          console.log('this is the error', err);
-        }
-      });
-  }
-
-  addGoal(obj) {
-    let newGoal = {
-      userKey: obj.userKey,
-      goals: obj.goals,
-    };
-    let currDoc = this.db
-      .find({
-        selector: { userKey: { $eq: obj.userKey }, goals: { $gt: null } },
-      })
-      .then(function(result, err) {
-        if (!err) {
-          console.log('successfully in goals  by user', result);
-          return result;
-        } else {
-          console.log('this is the error', err);
-        }
-      });
-    console.log(currDoc);
-    this.db.put(doc); // initial put
-    db.get('test')
-      .then(function(doc) {
-        doc.results[doc.results.length] = 44; // modify it here instead
-        return db.put(doc);
-      })
-      .then(function() {
-        return db.get('test');
-      })
-      .then(function(doc) {
-        console.log(doc);
-      });
+    this.db.createIndex({ index: { fields: ['userKey', '_id'] } });
   }
 
   async getArticlesByUser(userId) {
@@ -107,7 +60,10 @@ export default class DB {
       .find({ selector: { userKey: { $eq: inputUserId } } })
       .then(function(result, err) {
         if (!err) {
-          console.log('successfully found articles by user', result);
+          console.log(
+            'successfully found articles by user',
+            result
+          );
           return result;
         } else {
           console.log('this is the error', err);
@@ -115,12 +71,8 @@ export default class DB {
       });
   }
 
-  deleteArticle(article){
-   this.db.remove(article);
-    
-
-
-
+  deleteArticle(article) {
+    this.db.remove(article);
   }
 
   // USER METHODS
