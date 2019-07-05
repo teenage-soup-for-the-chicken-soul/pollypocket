@@ -21,7 +21,7 @@ class AddArticleForm extends React.Component {
       open: false
     };
     this.handleClick = this.handleClick.bind(this);
-    this.handleFindArticles = this.handleFindArticles.bind(this);
+
   }
 
   componentDidMount() {
@@ -31,10 +31,7 @@ class AddArticleForm extends React.Component {
   handleClick() {
     this.props.addArticle(this.state);
   }
-  async handleFindArticles() {
-    await this.state.db.createDBIndex();
-    this.state.db.findArticle(this.state.userKey);
-  }
+ 
 
   render() {
     return (
