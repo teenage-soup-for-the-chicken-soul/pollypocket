@@ -10,8 +10,6 @@ export { default as UserHome } from './dashboard';
 export { default as IndArticle } from './indArticle';
 export { default as Signup } from './signUpDialogBox';
 export { default as Login } from './loginDialogBox';
-export { default as AddGoalPop } from './addGoalDIalogBox';
-export { default as AddGoalTest } from './testingAddGoal';
 export { default as AddArticleForm } from './addArticleForm';
 
 // export { Login } from './authForm';

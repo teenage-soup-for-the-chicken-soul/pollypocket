@@ -39,7 +39,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-
 // const [open, setOpen] = React.useState(false);
 
 class Dashboard extends React.Component {
@@ -55,41 +54,47 @@ class Dashboard extends React.Component {
     this.setState({ currArticles: this.props.articles });
   }
 
-  //set up for Tier 2
-  // handleDelete() {}
-  // handleClick() {}
-
   render() {
     return (
       <div style={stylesheet.greaterContainer}>
         <div style={stylesheet.header}>MY ARTICLES</div>
+        <div style={stylesheet.addBtn}>
+          <Button
+            href="/article/add"
+            variant="contained"
+            size="small"
+            color="primary"
+          >
+            Add A Article
+          </Button>
+        </div>
         <div style={stylesheet.container}>
           {this.state.currArticles.length !== 0 ? (
             this.state.currArticles.map((article, index) => (
               <Card key={index} className="card" width="340">
-                <CardActionArea>
-                  <Link
-                    to={{
-                      pathname: '/article',
-                      state: {
-                        currentArticle: article,
-                      },
-                    }}
-                    key={article._id}
-                  >
+                <Link
+                  to={{
+                    pathname: '/article',
+                    state: {
+                      currentArticle: article,
+                    },
+                  }}
+                  key={article._id}
+                >
+                  <CardActionArea>
                     <CardMedia
                       className="media"
                       style={stylesheet.media}
                       image={article.image}
                       title={article.title}
                     />
-                  </Link>
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {article.title}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {article.title}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
                 <CardActions>
                   <Button size="small" color="primary">
                     <Link
@@ -120,11 +125,7 @@ class Dashboard extends React.Component {
               </Card>
             ))
           ) : (
-            <div style={stylesheet.addBtn}>
-              <Button href="/article/add" variant="contained" size="small" color="primary">
-                Add A Article
-              </Button>
-            </div>
+            <div />
           )}
         </div>
       </div>

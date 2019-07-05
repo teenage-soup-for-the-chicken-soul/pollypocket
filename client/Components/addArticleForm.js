@@ -37,14 +37,6 @@ class AddArticleForm extends React.Component {
     return (
       <div>
         <form className="form-add-article">
-          Article Title:
-          <br />
-          <input
-            type="text"
-            value={this.state.title}
-            onChange={event => this.setState({ title: event.target.value })}
-          />
-          <br />
           Article Url:
           <br />
           <input
