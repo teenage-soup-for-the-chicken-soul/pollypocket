@@ -23,53 +23,69 @@ import CloseIcon from '@material-ui/icons/Close';
 
 let stylesheet = {
   greaterContainer: {
-    margin: '30px',
+    padding: '7vh 2vw 7vh 2vw',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, auto [col-start])',
+    gridGap: '2vw',
   },
   container: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(4, auto [col-start])',
+    gridTemplateColumns: 'repeat(1, auto [col-start])',
     gridGap: '50px',
   },
   media: {
     height: 140,
   },
+  addBtnContainer: {
+    marginTop: '5vh',
+    marginBottom: '2vh'
+  },
   addBtn: {
-    margin: '30px',
+    fontFamily: 'Open Sans',
+    width: '28vw',
+    backgroundColor: '#d3c1c3',
   },
   header: {
-    margin: '30px',
+    marginTop: '5vh',
+  },
+  sideNav: {
+    width: '30vw',
+    height: '100%',
+  },
+  dataPlaceholder: {
+    maxWidth: '28vw',
+    height: '100%',
   },
 };
 
 class Dashboard extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      currArticles: [],
-    };
-  }
-
   async componentDidMount() {
     await this.props.getArticles(this.props.userKey);
-    this.setState({ currArticles: this.props.articles });
-    console.log('in component did mount - user key', this.props.userKey);
   }
 
   render() {
     return (
       <div style={stylesheet.greaterContainer}>
-        <div style={stylesheet.header}>MY ARTICLES</div>
-        <div style={stylesheet.addBtn}>
-          <Button
-            href="/article/add"
-            variant="contained"
-            size="small"
-            color="primary"
-          >
-            Add A Article
-          </Button>
+        <div style={stylesheet.sideNav}>
+          <div style={stylesheet.addBtnContainer}>
+            <Button
+              href="/article/add"
+              variant="contained"
+              size="small"
+              style={stylesheet.addBtn}
+            >
+              <i className="material-icons">control_point</i>
+              Article
+            </Button>
+          </div>
+          data vis placeholder
+          <img
+            style={stylesheet.dataPlaceholder}
+            src="https://miro.medium.com/max/788/1*frKDXJuqOOKMNJL9rYJVcQ.gif"
+          />
         </div>
         <div style={stylesheet.container}>
+          <div style={stylesheet.header}>ARTICLES</div>
           {this.props.articles.length !== 0 ? (
             this.props.articles.map((article, index) => (
               <Card key={index} className="card" width="340">
@@ -90,7 +106,7 @@ class Dashboard extends React.Component {
                       title={article.title}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
+                      <Typography gutterBottom variant="h5" component="h4">
                         {article.title}
                       </Typography>
                     </CardContent>
