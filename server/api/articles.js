@@ -11,7 +11,7 @@ const cloudant = Cloudant({
 // );
 
 //POSTS NEW ARTICLE WITH JSDOM
-function insertData(obj) {
+async function insertData(obj) {
   const db = cloudant.use('articles');
   let cssURLArr = [];
   let cssStyle = [];
@@ -23,7 +23,7 @@ function insertData(obj) {
     QuerySelector: true,
   }; //not sure if this is doing anything
 
-  JSDOM.fromURL(obj.articleURL, {
+  await JSDOM.fromURL(obj.articleURL, {
     resources: 'usable',
     pretendToBeVisual: true,
     runScripts: 'dangerously',
@@ -41,7 +41,8 @@ function insertData(obj) {
         .querySelectorAll('style')
         .forEach(node => cssStyle.push(node.innerHTML));
     }
-    db.insert({
+    console.log('new article posted');
+    return db.insert({
       userKey: obj.userKey,
       title: articleTitle,
       image: mainImage,
@@ -51,7 +52,6 @@ function insertData(obj) {
       articleURL: obj.articleURL,
       goalId: obj.goalId,
     });
-    console.log('new article posted');
   });
 }
 

@@ -1,9 +1,11 @@
 import PouchDB from 'pouchDB';
 import find from 'pouchdb-find';
+import '../secrets';
 PouchDB.plugin(find);
 
 export default class DB {
   constructor(name) {
+    console.log('url from secret', process.env.COUCHDB_URL);
     // set up the remote pouchdb and local and sync
     const remotedb = new PouchDB(
       `${process.env.COUCHDB_URL}${name}`
