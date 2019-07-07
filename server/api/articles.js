@@ -1,14 +1,18 @@
 const router = require('express').Router();
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
-const nano = require('nano')(
-  process.env.COUCHDB_URL || 'http://127.0.0.1:5984'
-);
-
+const Cloudant = require('@cloudant/cloudant');
+const cloudant = Cloudant({
+  account: '30596e4a-b362-459e-8c63-3cce3330092c-bluemix',
+  password: '2fac58774dfb6ff1ff9b5b16a919c1953767d48b581d8148ce34b38ac7383a6d',
+});
+// const nano = require('nano')(
+//   process.env.COUCHDB_URL || 'http://127.0.0.1:5984'
+// );
 
 //POSTS NEW ARTICLE WITH JSDOM
 function insertData(obj) {
-  const db = nano.use('articles');
+  const db = cloudant.use('articles');
   let cssURLArr = [];
   let cssStyle = [];
   let parsedBody;
@@ -55,7 +59,7 @@ function insertData(obj) {
 
 router.post('/', async (req, res, next) => {
   try {
-    // const {userKey, goalId} = req.body
+    const {userKey, goalId} = req.body
     await insertData(req.body);
     res.status(201).send('Success, Article Added!');
   } catch (e) {
