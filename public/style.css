@@ -1,10 +1,21 @@
-
 body {
   font-family: sans-serif;
 }
 
 a {
   text-decoration: none;
+  color: #c37d92;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #846267;
+}
+
+a:hover {
+  text-decoration-color: none;
+  color: #4e4e4e;
 }
 
 label {
@@ -21,34 +32,34 @@ form div {
   display: inline-block;
 }
 
-
-.nav-welcome{
+.nav-welcome {
+  font-family: 'Open Sans', sans-serif;
   text-decoration: none;
-  color: #FFF;
+  color: #4e4e4e;
 }
 
-.form-add-article{
+.form-add-article {
   max-width: 500px;
   margin: 2rem auto;
-  border: 2px solid #FFF;
-  padding: 2rem
+  border: 2px solid #fff;
+  padding: 2rem;
 }
 
-input{
+input {
   display: block;
   width: 80%;
 }
 
-.submit-btn{
+.submit-btn {
   border: 0;
-  background: #0D0221;
-  padding: .5rem;
-  color: #FFF;
+  background: #0d0221;
+  padding: 0.5rem;
+  color: #fff;
   width: auto;
   text-transform: uppercase;
   cursor: pointer;
 }
 
-.submit-btn:hover{
-  background: #3F51B5;
+.submit-btn:hover {
+  background: #3f51b5;
 }

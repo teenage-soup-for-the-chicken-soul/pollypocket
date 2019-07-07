@@ -15,7 +15,13 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-const stylesheet = {
+//snackbar test
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+// const [open, setOpen] = React.useState(false);
+
+let stylesheet = {
   greaterContainer: {
     margin: '30px',
   },
@@ -34,12 +40,6 @@ const stylesheet = {
     margin: '30px',
   },
 };
-//snackbar test
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-
-// const [open, setOpen] = React.useState(false);
 
 class Dashboard extends React.Component {
   constructor() {
@@ -52,6 +52,7 @@ class Dashboard extends React.Component {
   async componentDidMount() {
     await this.props.getArticles(this.props.userKey);
     this.setState({ currArticles: this.props.articles });
+    console.log('in component did mount - user key', this.props.userKey);
   }
 
   render() {
@@ -69,8 +70,8 @@ class Dashboard extends React.Component {
           </Button>
         </div>
         <div style={stylesheet.container}>
-          {this.state.currArticles.length !== 0 ? (
-            this.state.currArticles.map((article, index) => (
+          {this.props.articles.length !== 0 ? (
+            this.props.articles.map((article, index) => (
               <Card key={index} className="card" width="340">
                 <Link
                   to={{

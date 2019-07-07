@@ -7,14 +7,13 @@ module.exports = {
     path: __dirname,
     filename: './public/bundle.js'
   },
-  mode: 'development',
-  context: __dirname,
+  // mode: 'development',
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   devtool: 'source-map',
   watchOptions: {
     ignored: /node_modules/
-  },
-  resolve: {
-    extensions: ['.js', '.jsx']
   },
   module: {
     rules: [
@@ -25,13 +24,13 @@ module.exports = {
           loader: 'babel-loader'
         }
       },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      }
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     'style-loader',
+      //     'css-loader'
+      //   ]
+      // }
     ]
   }
 };

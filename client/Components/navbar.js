@@ -4,24 +4,84 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../store';
 import AppBar from '@material-ui/core/AppBar';
+import { Grid, FormHelperText } from '@material-ui/core';
 
+const stylesheet = {
+  container: {
+    width: '100%',
+    height: '10vh',
+    backgroundColor: '#EEE5BF',
+  },
+  navelements: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  logo: {
+    maxHeight: '5vh',
+    width: 'auto',
+  },
+  navCell: {
+    display: 'flex',
+    maxHeight: '10vh',
+    width: 'auto',
+  },
+  cellImage: {
+    maxHeight: '3vh',
+    maxWidth: 'auto',
+  },
+};
+
+const greeting = email => {
+  let emailGreeting = email.split('@')[0];
+  let firstLetter = email[0].toUpperCase();
+  return firstLetter.concat(emailGreeting.slice(1));
+};
 const Navbar = ({ handleClick, isLoggedIn, email }) => (
   <AppBar>
-    <nav>
+    <nav style={stylesheet.container}>
       {isLoggedIn ? (
-        <div>
+        <div style={stylesheet.navelements}>
           {/* The navbar will show these links after you log in */}
-          <NavLink to="/home">Home</NavLink>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-          <a className="nav-welcome" href="#">Welcome, {email.split("@")[0]}!</a>
+          <NavLink to="/home">
+            <img
+              src="https://i.imgur.com/uFNnZAt.png"
+              alt="polly pocket logo"
+              style={stylesheet.logo}
+            />
+          </NavLink>
+          <div>
+            <a className="nav-welcome" href="#">
+              <div style={stylesheet.navCell}>
+                Welcome,
+                {greeting(email)}!
+              </div>
+            </a>
+            <a href="#" onClick={handleClick}>
+              <div style={stylesheet.navCell}>
+                <img
+                  src="https://i.imgur.com/vptO39u.png"
+                  style={stylesheet.cellImage}
+                  alt="logout"
+                />
+                Logout
+              </div>
+            </a>
+          </div>
         </div>
       ) : (
-        <div>
+        <div style={stylesheet.navelements}>
           {/* The navbar will show these links before you log in */}
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/signup">Sign Up</NavLink>
+          <NavLink to="/">
+            <img
+              src="https://i.imgur.com/uFNnZAt.png"
+              alt="polly pocket logo"
+              style={stylesheet.logo}
+            />
+          </NavLink>
+          <div>
+            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/signup">Sign Up</NavLink>
+          </div>
         </div>
       )}
     </nav>
@@ -34,7 +94,7 @@ const Navbar = ({ handleClick, isLoggedIn, email }) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    email: state.user.email
+    email: state.user.email,
   };
 };
 
@@ -57,5 +117,5 @@ export default connect(
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  email: PropTypes.string
+  email: PropTypes.string,
 };
