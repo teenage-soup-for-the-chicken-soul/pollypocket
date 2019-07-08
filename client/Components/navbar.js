@@ -6,6 +6,8 @@ import { logout } from '../store';
 import AppBar from '@material-ui/core/AppBar';
 import { Grid, FormHelperText } from '@material-ui/core';
 
+process.env.PUBLIC_URL = process.env.PUBLIC_URL || '';
+
 const stylesheet = {
   container: {
     width: '100%',
@@ -18,7 +20,8 @@ const stylesheet = {
   },
   logo: {
     maxHeight: '5vh',
-    width: 'auto',
+    maxWidth: '100%',
+    display: 'block',
   },
   navCell: {
     display: 'flex',
@@ -27,7 +30,8 @@ const stylesheet = {
   },
   cellImage: {
     maxHeight: '3vh',
-    maxWidth: 'auto',
+    maxWidth: '100%',
+    display: 'block',
   },
 };
 
@@ -44,26 +48,23 @@ const Navbar = ({ handleClick, isLoggedIn, email }) => (
           {/* The navbar will show these links after you log in */}
           <NavLink to="/home">
             <img
-              src="https://i.imgur.com/uFNnZAt.png"
+              src={process.env.PUBLIC_URL + '/assets/logos/purplesmall.png'}
               alt="polly pocket logo"
               style={stylesheet.logo}
             />
           </NavLink>
           <div>
-            <a className="nav-welcome" href="#">
+            <a className="nav-welcome" href="/home">
               <div style={stylesheet.navCell}>
-                Welcome,
-                {greeting(email)}!
+                {`Welcome, 
+                ${greeting(email)}!  `}
+                <i className="material-icons">local_library</i>
               </div>
             </a>
             <a href="#" onClick={handleClick}>
               <div style={stylesheet.navCell}>
-                <img
-                  src="https://i.imgur.com/vptO39u.png"
-                  style={stylesheet.cellImage}
-                  alt="logout"
-                />
-                Logout
+                {`Logout `}
+                <i className="material-icons">label_important</i>
               </div>
             </a>
           </div>

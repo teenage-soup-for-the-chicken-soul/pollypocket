@@ -47,7 +47,7 @@ class LogInDialogBox extends React.Component {
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Fill out this form to get started!
+            Log In
           </DialogContentText>
           <TextField
             margin="normal"

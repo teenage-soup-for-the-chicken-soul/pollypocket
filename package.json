@@ -43,6 +43,7 @@
     "history": "^4.9.0",
     "html-react-parser": "^0.8.0",
     "jsdom": "^15.1.1",
+    "material-design-icons": "^3.0.1",
     "morgan": "^1.9.1",
     "nano": "^8.1.0",
     "nodemon": "^1.19.0",

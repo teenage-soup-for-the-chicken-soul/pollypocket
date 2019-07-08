@@ -35,11 +35,9 @@ export const getArticlesThunk = userKey => async dispatch => {
 export const addArticleThunk = obj => async dispatch => {
   try {
     await axios.post('/api/articles', obj);
-    console.log('object in add art. thunk', obj);
     let currentdb = await new db('articles');
     await currentdb.createDBIndex();
     const res = await currentdb.findArticle(obj.userKey);
-    console.log('res docs', res.docs);
     dispatch(getArticles(res.docs));
   } catch (error) {
     console.log('Error adding new article in thunk', error);
@@ -50,7 +48,6 @@ export const deleteArticleThunk = article => async dispatch => {
   try {
     let currentdb = await new db('articles');
     await currentdb.deleteArticle(article);
-
     await currentdb.createDBIndex();
     const res = await currentdb.findArticle(article.userKey);
     dispatch(getArticles(res.docs));

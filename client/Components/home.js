@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
+import Footer from './footer';
+process.env.PUBLIC_URL = process.env.PUBLIC_URL || '';
 
 export default class Home extends Component {
   render() {
     return (
-      <div>
-        <div display="flex">
-          <img src="https://hottopic.scene7.com/is/image/HotTopic/11431375_hi?$pdp_hero_standard$" />
-        </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+          paddingTop: '6vh',
+        }}
+      >
+        <img
+          src={process.env.PUBLIC_URL + '/assets/images/homepageDesktop.png'}
+          style={{ maxWidth: '100%', maxHeight: '80vh', display: 'block' }}
+        />
+        <Footer />
       </div>
     );
   }

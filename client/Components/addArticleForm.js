@@ -7,9 +7,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-
-
-
 class AddArticleForm extends React.Component {
   constructor() {
     super();
@@ -18,10 +15,9 @@ class AddArticleForm extends React.Component {
       articleURL: '',
       goals: [],
       userKey: '',
-      open: false
+      open: false,
     };
     this.handleClick = this.handleClick.bind(this);
-
   }
 
   componentDidMount() {
@@ -31,7 +27,6 @@ class AddArticleForm extends React.Component {
   handleClick() {
     this.props.addArticle(this.state);
   }
- 
 
   render() {
     return (
@@ -47,13 +42,16 @@ class AddArticleForm extends React.Component {
             }
           />
           <br />
-          Goal Id:
-          <br />
-          <input
-            type="text"
-            value={this.state.goalId}
+          <label>Category</label>
+          <select
+            id="myList"
             onChange={event => this.setState({ goalId: event.target.value })}
-          />
+          >
+            <option value="learning">For Learning</option>
+            <option value="leisure">For Fun</option>
+            <option value="career">For Work</option>
+            <option value="news">To Stay Up To Date</option>
+          </select>
           <br />
           <br />
           <button
@@ -61,41 +59,45 @@ class AddArticleForm extends React.Component {
             type="button"
             value="Submit"
             onClick={() => {
-              this.handleClick(this.state)
-              this.setState({open: true})
-              this.props.history.push('/home')
+              this.handleClick(this.state);
+              this.setState({ open: true });
+              this.props.history.push('/home');
             }}
           >
             Submit
           </button>
           <div>
-           {this.state.open ?
-            <Snackbar
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            open={open}
-            autoHideDuration={6000}
-
-            ContentProps={{
-              'aria-describedby': 'message-id',
-            }}
-            message={<span id="message-id">Article Added!</span>}
-            action={[
-            ,
-              <IconButton
-                key="close"
-                aria-label="Close"
-                color="inherit"
-                className="close"
-                onClick={()=> {this.setState({open: false})}}
-              >
-                <CloseIcon />
-              </IconButton>,
-            ]}
-          /> : <div></div>}
-        </div>
+            {this.state.open ? (
+              <Snackbar
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                open={open}
+                autoHideDuration={6000}
+                ContentProps={{
+                  'aria-describedby': 'message-id',
+                }}
+                message={<span id="message-id">Article Added!</span>}
+                action={[
+                  ,
+                  <IconButton
+                    key="close"
+                    aria-label="Close"
+                    color="inherit"
+                    className="close"
+                    onClick={() => {
+                      this.setState({ open: false });
+                    }}
+                  >
+                    <CloseIcon />
+                  </IconButton>,
+                ]}
+              />
+            ) : (
+              <div />
+            )}
+          </div>
         </form>
       </div>
     );
