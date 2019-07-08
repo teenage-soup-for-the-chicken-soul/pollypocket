@@ -10,7 +10,6 @@ export default class DB {
       `${process.env.COUCHDB_URL}${name}`
       //`http://admin:graceHopper@localhost:5984/${name}`
     );
-    console.log('looking at remotedDB', remotedb);
     console.log('Remote database created Successfully.');
     this.db = new PouchDB(name, { skip_setup: true });
     console.log('Local database created Successfully.');
@@ -21,6 +20,10 @@ export default class DB {
   }
 
   // CLASS METHODS ------------------------
+  
+  createDBIndex() {
+    this.db.createIndex({ index: { fields: ['userKey', '_id'] } });
+    }
 
   findArticle(inputUserId) {
     return this.db
@@ -40,9 +43,7 @@ export default class DB {
   }
 
   // ARTICLE METHODS
-  // async createDBIndex() {
-  //   this.db.createIndex({ index: { fields: ['userKey', '_id'] } });
-  // }
+
 
   // async getArticlesByUser(userId) {
   //   let allArticles = await this.db.get(id).then(function(doc) {
