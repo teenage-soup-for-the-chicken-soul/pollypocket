@@ -16,6 +16,7 @@ class AddArticleForm extends React.Component {
       goals: [],
       userKey: '',
       open: false,
+      loading: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -29,7 +30,9 @@ class AddArticleForm extends React.Component {
   }
 
   render() {
-    return (
+    return this.state.loading ? (
+      <div class="loader" />
+    ) : (
       <div>
         <form className="form-add-article">
           Article Url:
@@ -58,9 +61,11 @@ class AddArticleForm extends React.Component {
             className="submit-btn"
             type="button"
             value="Submit"
-            onClick={() => {
-              this.handleClick(this.state);
-              this.setState({ open: true });
+            onClick={async () => {
+              this.setState({ loading: true });
+              await this.handleClick(this.state);
+              console.log('awaited handleClick');
+              await this.setState({ open: true, loading: false });
               this.props.history.push('/home');
             }}
           >
@@ -80,7 +85,6 @@ class AddArticleForm extends React.Component {
                 }}
                 message={<span id="message-id">Article Added!</span>}
                 action={[
-                  ,
                   <IconButton
                     key="close"
                     aria-label="Close"

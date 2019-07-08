@@ -4,6 +4,7 @@ import { getArticlesThunk } from '../store/reducers/articles';
 import { Link } from 'react-router-dom';
 import AddArticleForm from './addArticleForm';
 import { deleteArticleThunk } from '../store/reducers/articles';
+import clippy from 'clippyjs';
 
 //Card import - will be used in single goal view for Tier 2
 import { makeStyles } from '@material-ui/core/styles';
@@ -67,7 +68,6 @@ class Dashboard extends React.Component {
   async componentDidMount() {
     await this.props.getArticles(this.props.userKey);
   }
-
   render() {
     return (
       <div style={stylesheet.greaterContainer}>
@@ -93,9 +93,9 @@ class Dashboard extends React.Component {
               <Typography color="textSecondary" gutterBottom>
                 CONTACT
               </Typography>
+              <Typography color="textSecondary">Amaris Chang</Typography>
               <Typography color="textSecondary">Asia Gagnon</Typography>
-              <Typography color="textSecondary">Asia Gagnon</Typography>
-              <Typography color="textSecondary">Asia Gagnon</Typography>
+              <Typography color="textSecondary">Natasha Kelly</Typography>
             </CardContent>
             <CardActions>
               <Button size="small">Git Repo</Button>
