@@ -6,6 +6,8 @@ import { logout } from '../store';
 import AppBar from '@material-ui/core/AppBar';
 import { Grid, FormHelperText } from '@material-ui/core';
 
+process.env.PUBLIC_URL = process.env.PUBLIC_URL || '';
+
 const stylesheet = {
   container: {
     width: '100%',
@@ -46,7 +48,7 @@ const Navbar = ({ handleClick, isLoggedIn, email }) => (
           {/* The navbar will show these links after you log in */}
           <NavLink to="/home">
             <img
-              src="https://i.imgur.com/uKWcyvY.png"
+              src={process.env.PUBLIC_URL + '/assets/logos/purplesmall.png'}
               alt="polly pocket logo"
               style={stylesheet.logo}
             />

@@ -23,12 +23,13 @@ import CloseIcon from '@material-ui/icons/Close';
 
 let stylesheet = {
   greaterContainer: {
-    padding: '7vh 2vw 7vh 2vw',
+    padding: '7vh 5vw 7vh 5vw',
     display: 'grid',
     gridTemplateColumns: 'repeat(2, auto [col-start])',
     gridGap: '2vw',
   },
   container: {
+    maxWidth: '45vw',
     display: 'grid',
     gridTemplateColumns: 'repeat(1, auto [col-start])',
     gridGap: '50px',
@@ -38,15 +39,18 @@ let stylesheet = {
   },
   addBtnContainer: {
     marginTop: '5vh',
-    marginBottom: '2vh'
+    marginBottom: '2vh',
   },
   addBtn: {
     fontFamily: 'Open Sans',
     width: '28vw',
-    backgroundColor: '#d3c1c3',
+    backgroundColor: '#e8f8c1',
   },
   header: {
     marginTop: '5vh',
+    fontFamily: 'Zilla Slab',
+    fontSize: '2rem',
+    color: '#846267',
   },
   sideNav: {
     width: '30vw',
@@ -54,7 +58,8 @@ let stylesheet = {
   },
   dataPlaceholder: {
     maxWidth: '28vw',
-    height: '100%',
+    height: '65%',
+    marginBottom: '2vh',
   },
 };
 
@@ -81,8 +86,21 @@ class Dashboard extends React.Component {
           data vis placeholder
           <img
             style={stylesheet.dataPlaceholder}
-            src="https://miro.medium.com/max/788/1*frKDXJuqOOKMNJL9rYJVcQ.gif"
+            src="https://image.freepik.com/free-photo/colorful-bar-graph-orange-graph-pink-background_23-2147892252.jpg"
           />
+          <Card>
+            <CardContent>
+              <Typography color="textSecondary" gutterBottom>
+                CONTACT
+              </Typography>
+              <Typography color="textSecondary">Asia Gagnon</Typography>
+              <Typography color="textSecondary">Asia Gagnon</Typography>
+              <Typography color="textSecondary">Asia Gagnon</Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small">Git Repo</Button>
+            </CardActions>
+          </Card>
         </div>
         <div style={stylesheet.container}>
           <div style={stylesheet.header}>ARTICLES</div>

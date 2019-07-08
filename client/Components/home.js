@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Footer from './footer';
+process.env.PUBLIC_URL = process.env.PUBLIC_URL || '';
 
 export default class Home extends Component {
   render() {
@@ -14,7 +15,7 @@ export default class Home extends Component {
         }}
       >
         <img
-          src="https://i.imgur.com/u1TQZV9.png"
+          src={process.env.PUBLIC_URL + '/assets/images/homepageDesktop.png'}
           style={{ maxWidth: '100%', maxHeight: '80vh', display: 'block' }}
         />
         <Footer />
