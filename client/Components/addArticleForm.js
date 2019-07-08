@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addArticleThunk } from '../store/reducers/articles';
-
+import LoadingArticle from './loadingArticle';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+
 
 class AddArticleForm extends React.Component {
   constructor() {
@@ -25,13 +26,13 @@ class AddArticleForm extends React.Component {
     this.setState({ userKey: this.props.userKey });
   }
 
-  handleClick() {
-    this.props.addArticle(this.state);
+  async handleClick() {
+    await this.props.addArticle(this.state);
   }
 
   render() {
     return this.state.loading ? (
-      <div class="loader" />
+      <LoadingArticle />
     ) : (
       <div>
         <form className="form-add-article">
@@ -64,8 +65,7 @@ class AddArticleForm extends React.Component {
             onClick={async () => {
               this.setState({ loading: true });
               await this.handleClick(this.state);
-              console.log('awaited handleClick');
-              await this.setState({ open: true, loading: false });
+              this.setState({ open: true, loading: false });
               this.props.history.push('/home');
             }}
           >
