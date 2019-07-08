@@ -1,3 +1,4 @@
+
 import React from "react";
 import { connect } from "react-redux";
 import { getArticlesThunk } from "../store/reducers/articles";
@@ -7,6 +8,10 @@ import { deleteArticleThunk } from "../store/reducers/articles";
 import { markReadThunk } from "../store/reducers/articles";
 import {markUnreadThunk} from "../store/reducers/articles";
 import StatusBarGraph from "./statusBarGraph"
+
+
+import clippy from 'clippyjs';
+
 
 //Card import - will be used in single goal view for Tier 2
 
@@ -85,7 +90,6 @@ class Dashboard extends React.Component {
   async componentDidMount() {
     await this.props.getArticles(this.props.userKey);
   }
-
   render() {
     let readArticles = this.props.articles.filter(
       article => article.read === "false"
@@ -132,9 +136,9 @@ class Dashboard extends React.Component {
               <Typography color="textSecondary" gutterBottom>
                 CONTACT
               </Typography>
+              <Typography color="textSecondary">Amaris Chang</Typography>
               <Typography color="textSecondary">Asia Gagnon</Typography>
-              <Typography color="textSecondary">Asia Gagnon</Typography>
-              <Typography color="textSecondary">Asia Gagnon</Typography>
+              <Typography color="textSecondary">Natasha Kelly</Typography>
             </CardContent>
             <CardActions>
               <Button size="small">Git Repo</Button>

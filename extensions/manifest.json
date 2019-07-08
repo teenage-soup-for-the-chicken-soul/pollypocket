@@ -6,7 +6,11 @@
       "128": "icon128.png",
       "16": "icon16.png"
     },
-    "permissions": ["storage", "notifications"],
+    "oauth2": {
+    "client_id": "650490694654-fpmt5l3ouj5j9p8ku9lp0m0dcpmf56sp.apps.googleusercontent.com",
+    "scopes":["https://www.googleapis.com/auth/contacts.readonly"]
+    },
+    "permissions": ["storage", "notifications", "identity"],
     "content_scripts": [ {
       "matches": ["<all_urls>"],
       "js": ["jquery.min.js", "content.js"]
