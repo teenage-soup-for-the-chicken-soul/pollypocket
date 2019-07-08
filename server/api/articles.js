@@ -5,8 +5,8 @@ const rp = require('request-promise');
 require('../../secrets');
 const Cloudant = require('@cloudant/cloudant');
 const cloudant = Cloudant({
-  account: process.env.CLOUDANT_ID,
-  password: process.env.CLOUDANT_SECRET,
+  account: '30596e4a-b362-459e-8c63-3cce3330092c-bluemix',
+  password: '2fac58774dfb6ff1ff9b5b16a919c1953767d48b581d8148ce34b38ac7383a6d',
 });
 
 //POSTS NEW ARTICLE WITH JSDOM
