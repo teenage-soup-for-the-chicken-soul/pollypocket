@@ -60,6 +60,9 @@ async function insertData(obj) {
       linkData: parsedBody,
       articleURL: obj.articleURL,
       goalId: obj.goalId,
+      read: "false"
+
+
     });
   });
 }

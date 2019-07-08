@@ -7,7 +7,7 @@ export default class DB {
   constructor(name) {
     // set up the remote pouchdb and local and sync
     const remotedb = new PouchDB(
-      `${process.env.COUCHDB_URL}${name}`
+      `https://30596e4a-b362-459e-8c63-3cce3330092c-bluemix:2fac58774dfb6ff1ff9b5b16a919c1953767d48b581d8148ce34b38ac7383a6d@30596e4a-b362-459e-8c63-3cce3330092c-bluemix.cloudantnosqldb.appdomain.cloud/${name}`
       //`http://admin:graceHopper@localhost:5984/${name}`
     );
     console.log('Remote database created Successfully.');
@@ -20,7 +20,7 @@ export default class DB {
   }
 
   // CLASS METHODS ------------------------
-  
+
   createDBIndex() {
     this.db.createIndex({ index: { fields: ['userKey', '_id'] } });
     }
@@ -42,6 +42,37 @@ export default class DB {
     this.db.remove(article);
   }
 
+  markArticleRead(article){
+    this.db.put({
+      _id: article._id,
+      _rev: article._rev,
+      userKey: article.userKey,
+      title: article.title,
+      image: article.image,
+      linkCSS: article.linkCSS,
+      styleCss: article.styleCss,
+      linkData: article.linkData,
+      articleURL: article.articleURL,
+      read: "true"
+
+    })
+  }
+
+  markArticleUnread(article){
+    this.db.put({
+      _id: article._id,
+      _rev: article._rev,
+      userKey: article.userKey,
+      title: article.title,
+      image: article.image,
+      linkCSS: article.linkCSS,
+      styleCss: article.styleCss,
+      linkData: article.linkData,
+      articleURL: article.articleURL,
+      read: "false"
+
+    })
+  }
   // ARTICLE METHODS
 
 
