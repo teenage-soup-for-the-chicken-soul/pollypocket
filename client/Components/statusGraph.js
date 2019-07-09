@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { VictoryPie } from "victory";
-import {XYPlot, VerticalBarSeries, XAxis} from 'react-vis';
+import { VictoryPie} from "victory";
 import { connect } from "react-redux";
 import { getArticlesThunk } from "../store/reducers/articles";
-
-
-
 
 class StatusChart extends Component {
   async componentDidMount() {
@@ -27,19 +23,32 @@ class StatusChart extends Component {
     //
     // ];
     return (
-      <div className="App">
-        <VictoryPie colorScale={["#C37d92", "E0c1b3"]}
-  data={[
-    { x: "Read Articles", y:  readArticles.length},
-    { x: "Unread Articles", y: unreadArticles.length },
+      <div>
+        {(this.props.articles.length !== 0) ? (
+          <div className="App">
 
-  ]}
-/>
-     {/* <XYPlot height={200} width={200} yDomain={[(readArticles.length + unreadArticles.length), 0]}>
-  <VerticalBarSeries  color='C71585' data={data} />
+            <VictoryPie
 
-</XYPlot> */}
-
+              colorScale={["#fe5cb1", "#ffcfdc"]}
+              data={[
+                { x: "Read", y: readArticles.length },
+                { x: "Unread", y: unreadArticles.length }
+              ]}
+              labelRadius={70}
+              padAngle={3}
+              innerRadius={30}
+              radius={170}
+  style={{ labels: { fill: "white", fontSize: 16, fontWeight: "bold" } }}
+            />
+          </div>
+        ) : (
+          <div className="App">
+            <VictoryPie
+              colorScale={["#D89A9E"]}
+              data={[{ x: "Add Articles To See Progress Chart", y: 100 }]}
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -57,4 +66,3 @@ export default connect(
   mapState,
   mapDispatch
 )(StatusChart);
-

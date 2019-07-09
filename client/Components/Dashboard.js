@@ -1,16 +1,27 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { getArticlesThunk } from '../store/reducers/articles';
-import { Link } from 'react-router-dom';
+
+
+
+
+
+
+
+
+import React from "react";
+import { connect } from "react-redux";
+import { getArticlesThunk } from "../store/reducers/articles";
+import { Link } from "react-router-dom";
+
 import { deleteArticleThunk } from '../store/reducers/articles';
 import { markReadThunk } from '../store/reducers/articles';
 import { markUnreadThunk } from '../store/reducers/articles';
-import StatusBarGraph from './statusBarGraph';
+import StatusGraph from "./statusGraph"
+import TagGraph from "./tagsGraph"
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-// import AddArticleForm from './addArticleForm';
+
+
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -19,7 +30,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-// const [open, setOpen] = React.useState(false);
+
 
 let stylesheet = {
   greaterContainer: {
@@ -65,14 +76,17 @@ let stylesheet = {
     display: 'flex',
   },
   viewButton: {
-    width: '150px',
-    height: '50px',
-    color: '#846267',
-    marginTop: '5vh',
-    marginLeft: '50px',
-    backgroundColor: '#e8f8c1',
-    fontFamily: 'Open Sans',
-  },
+
+    width: "200px",
+    height: "30px",
+    color: "#846267",
+    marginTop: "5vh",
+    marginLeft: "20px",
+    backgroundColor: "#e8f8c1",
+    fontFamily: "Open Sans",
+    borderRadius: "2px"
+  }
+
 };
 
 class Dashboard extends React.Component {
@@ -121,12 +135,8 @@ class Dashboard extends React.Component {
               Article
             </Button>
           </div>
-
-          {/* <img
-            style={stylesheet.dataPlaceholder}
-            src="https://image.freepik.com/free-photo/colorful-bar-graph-orange-graph-pink-background_23-2147892252.jpg"
-          /> */}
-          <StatusBarGraph />
+          <StatusGraph />
+          <TagGraph/>
           <Card>
             <CardContent>
               <Typography color="textSecondary" gutterBottom>
@@ -170,22 +180,39 @@ class Dashboard extends React.Component {
         <div style={stylesheet.container}>
           <div style={stylesheet.headerContainer}>
             <div style={stylesheet.header}>ARTICLES</div>
-            <button
+            <Button
+                onClick={() => {
+                  this.setState({ status: "unread" });
+                }}
+              variant="contained"
+              size="small"
               style={stylesheet.viewButton}
+
               onClick={() => {
                 this.setState({ status: 'unread' });
               }}
+
             >
+
               UNREAD
-            </button>
-            <button
+            </Button>
+            <Button
+                onClick={() => {
+                  this.setState({ status: "read" });
+                }}
+              variant="contained"
+              size="small"
               style={stylesheet.viewButton}
+
               onClick={() => {
                 this.setState({ status: 'read' });
               }}
+
             >
+
               READ
-            </button>
+            </Button>
+
           </div>
 
           {this.props.articles.length !== 0 ? (
@@ -228,33 +255,32 @@ class Dashboard extends React.Component {
                       Read Now
                     </Link>
                   </Button>
-                  {this.state.status === 'unread' ? (
-                    <Button
-                      variant="contained"
-                      size="small"
-                      color="primary"
-                      onClick={() => {
-                        this.props.markRead(article);
-                      }}
-                    >
-                      Mark as Read
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="contained"
-                      size="small"
-                      color="primary"
-                      onClick={() => {
-                        this.props.markUnread(article);
-                      }}
-                    >
-                      Mark as Unread
-                    </Button>
-                  )}
+
+                  {this.state.status === 'unread'?  <Button
+                    variant="contained"
+                    size="small"
+                    color="grey"
+                    onClick={() => {
+                      this.props.markRead(article);
+                    }}
+                  >
+                    Mark as Read
+                  </Button> : <Button
+                    variant="contained"
+                    size="small"
+                    color="grey"
+                    onClick={() => {
+                      this.props.markUnread(article);
+                    }}
+                  >
+                    Mark as Unread
+                  </Button>}
+
+
 
                   <Button
                     size="small"
-                    color="primary"
+                    color="#846267"
                     onClick={() => {
                       this.setState({ snack: `${article.title} Deleted` });
                       this.setState({ open: true });
