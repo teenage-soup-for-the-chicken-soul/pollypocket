@@ -68,7 +68,13 @@ const setSaltAndPassword = user => {
 };
 
 User.beforeCreate(setSaltAndPassword);
-User.beforeCreate(user => (user.uniqueKey = uuidv1()));
+User.beforeCreate(user => {
+  if (user.googleId) {
+    user.uniqueKey = user.googleId;
+  } else {
+    user.uniqueKey = uuidv1();
+  }
+});
 User.beforeUpdate(setSaltAndPassword);
 User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword);
