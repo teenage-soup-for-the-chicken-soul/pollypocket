@@ -7,6 +7,19 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
+const stylesheet = {
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: '25vh',
+  },
+  submitBtn: {
+    fontFamily: 'Open Sans',
+    width: '20vw',
+    backgroundColor: '#e8f8c1',
+  },
+};
+
 class AddArticleForm extends React.Component {
   constructor() {
     super();
@@ -33,9 +46,9 @@ class AddArticleForm extends React.Component {
     return this.state.loading ? (
       <LoadingArticle />
     ) : (
-      <div>
+      <div style={stylesheet.container}>
         <form className="form-add-article">
-          Article Url:
+          <label>Article Url:</label>
           <br />
           <input
             type="text"
@@ -43,6 +56,7 @@ class AddArticleForm extends React.Component {
             onChange={event =>
               this.setState({ articleURL: event.target.value })
             }
+            required
           />
           <br />
           <label>Category</label>
@@ -57,22 +71,27 @@ class AddArticleForm extends React.Component {
           </select>
           <br />
           <br />
-          <button
-            className="submit-btn"
-            type="button"
-            value="Submit"
-            onClick={async () => {
-              this.setState({ loading: true });
-              await this.handleClick(this.state);
-              this.setState({ open: true, loading: false, articleURL: '' });
-              await setTimeout(() => {
-                console.log('in set time out');
-              }, 3000);
-              this.props.history.push('/home');
-            }}
-          >
-            Submit
-          </button>
+          {this.state.articleURL.length ? (
+            <Button
+              variant="contained"
+              size="small"
+              value="Submit"
+              style={stylesheet.submitBtn}
+              onClick={async () => {
+                this.setState({ loading: true });
+                await this.handleClick(this.state);
+                this.setState({ open: true, loading: false, articleURL: '' });
+                setTimeout(() => {
+                  this.props.history.push('/home');
+                }, 2000);
+              }}
+            >
+              Submit
+            </Button>
+          ) : (
+            <div />
+          )}
+
           <div>
             {this.state.open ? (
               <Snackbar

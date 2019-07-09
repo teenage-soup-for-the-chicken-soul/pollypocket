@@ -1,5 +1,6 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  color: #4e4e4e;
 }
 
 a {
@@ -39,10 +40,18 @@ form div {
 }
 
 .form-add-article {
-  max-width: 500px;
+  min-width: 40vw;
   margin: 2rem auto;
   border: 2px solid #fff;
   padding: 2rem;
+}
+
+.loadArticlePage {
+  background-image: url('https://i.imgur.com/J8ix7fR.png') no-repeat center
+    center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
 }
 
 input {
