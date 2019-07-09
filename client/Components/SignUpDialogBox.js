@@ -76,6 +76,21 @@ class SignUpDialogBox extends React.Component {
             onChange={event => this.setState({ password: event.target.value })}
           />
           <br />
+          <Button
+            href="/auth/google"
+            variant="contained"
+            color="primary"
+            fullWidth
+            aria-label="Full width button group"
+          >
+            <img
+              src="/assets/images/google.png"
+              alt="google-icon"
+              height="22"
+              width="22"
+            />
+            Sign Up with Google
+          </Button>
           {this.props.error && this.props.error.response && (
             <div> {this.props.error.response.data} </div>
           )}

@@ -7,7 +7,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-
 class AddArticleForm extends React.Component {
   constructor() {
     super();
@@ -65,7 +64,10 @@ class AddArticleForm extends React.Component {
             onClick={async () => {
               this.setState({ loading: true });
               await this.handleClick(this.state);
-              this.setState({ open: true, loading: false });
+              this.setState({ open: true, loading: false, articleURL: '' });
+              await setTimeout(() => {
+                console.log('in set time out');
+              }, 3000);
               this.props.history.push('/home');
             }}
           >
@@ -79,7 +81,7 @@ class AddArticleForm extends React.Component {
                   horizontal: 'left',
                 }}
                 open={open}
-                autoHideDuration={6000}
+                autoHideDuration={3000}
                 ContentProps={{
                   'aria-describedby': 'message-id',
                 }}

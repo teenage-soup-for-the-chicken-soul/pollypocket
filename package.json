@@ -36,7 +36,6 @@
     "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "^4.1.2",
     "axios": "^0.19.0",
-    "clippyjs": "0.0.3",
     "compression": "^1.7.4",
     "connect-session-sequelize": "^6.0.0",
     "express": "^4.17.1",
