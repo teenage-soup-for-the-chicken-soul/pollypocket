@@ -1,9 +1,6 @@
 import React from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+
 // import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = {
@@ -56,7 +53,8 @@ export default function Footer() {
         <i className="material-icons">face</i>
         {`-`}
       </div>
-      <div style={useStyles.name}>MEET THE TEAM</div>
+      <div style={useStyles.name}
+      >MEET THE TEAM</div>
       <div style={useStyles.authorContainer}>
         <div style={useStyles.eachAuthor}>
           <div style={useStyles.name}>Amaris Chang</div>
@@ -111,6 +109,6 @@ export default function Footer() {
         </div>
       </div>
       <div />
-    </BottomNavigation>
+     </BottomNavigation>
   );
 }
