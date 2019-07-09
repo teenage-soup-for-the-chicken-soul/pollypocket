@@ -47,6 +47,11 @@ class AddArticleForm extends React.Component {
       <LoadingArticle />
     ) : (
       <div style={stylesheet.container}>
+        <img
+          src={process.env.PUBLIC_URL + '/assets/images/addPageBackground.png'}
+          alt="polly-adding-article"
+          style={{ minWidth: '100vw', height: 'auto', display: 'block' }}
+        />
         <form className="form-add-article">
           <label>Article Url:</label>
           <br />
