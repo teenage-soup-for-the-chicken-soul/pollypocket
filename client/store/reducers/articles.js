@@ -56,6 +56,30 @@ export const deleteArticleThunk = article => async dispatch => {
   }
 };
 
+export const markReadThunk = article => async dispatch =>{
+  try {
+    let currentdb = await new db('articles');
+    await currentdb.markArticleRead(article)
+    await currentdb.createDBIndex();
+    const res = await currentdb.findArticle(article.userKey);
+    dispatch(getArticles(res.docs));
+  } catch (error) {
+console.log('Error in the mark read thunk', error)
+  }
+}
+
+export const markUnreadThunk = article => async dispatch =>{
+  try {
+    let currentdb = await new db('articles');
+    await currentdb.markArticleUnread(article)
+    await currentdb.createDBIndex();
+    const res = await currentdb.findArticle(article.userKey);
+    dispatch(getArticles(res.docs));
+  } catch (error) {
+console.log('Error in the mark read thunk', error)
+  }
+}
+
 const initialState = {
   articles: [],
 };

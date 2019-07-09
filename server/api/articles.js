@@ -60,6 +60,9 @@ async function insertData(obj) {
       linkData: parsedBody,
       articleURL: obj.articleURL,
       goalId: obj.goalId,
+      read: "false"
+
+
     });
   });
 }
@@ -68,6 +71,17 @@ async function insertData(obj) {
 
 router.post('/', async (req, res, next) => {
   try {
+    /*
+    logic for chrome extension
+    if(localStorage.length === 0){
+      // proceed with usual way of completing post request --- in the case of using the form
+    }
+    else{
+      const articleUrlEXT = localStorage.getItem('articleUrl');
+      pass this variable into insertData()
+    }
+
+    */
     const { userKey, articleURL, goalId } = req.body;
     await insertData({ articleURL, userKey, goalId });
     res.status(201).send('Success, Article Added!');
