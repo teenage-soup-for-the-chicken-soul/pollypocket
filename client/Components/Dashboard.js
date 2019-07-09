@@ -125,7 +125,7 @@ class Dashboard extends React.Component {
               Article
             </Button>
           </div>
-          Unread Articles vs. Read Articles
+
           {/* <img
             style={stylesheet.dataPlaceholder}
             src="https://image.freepik.com/free-photo/colorful-bar-graph-orange-graph-pink-background_23-2147892252.jpg"
@@ -137,8 +137,11 @@ class Dashboard extends React.Component {
                 CONTACT
               </Typography>
               <Typography color="textSecondary">Amaris Chang</Typography>
+
+              <Typography color="textSecondary">Natahsa Kelly</Typography>
               <Typography color="textSecondary">Asia Gagnon</Typography>
-              <Typography color="textSecondary">Natasha Kelly</Typography>
+
+
             </CardContent>
             <CardActions>
               <Button size="small">Git Repo</Button>
