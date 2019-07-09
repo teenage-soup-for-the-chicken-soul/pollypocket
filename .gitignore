@@ -5,3 +5,4 @@ public/bundle.js.map
 .DS_Store
 npm-debug.log
 secrets.js
+client/extensions
