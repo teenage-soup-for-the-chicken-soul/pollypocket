@@ -74,7 +74,7 @@ class LogInDialogBox extends React.Component {
           />
           <Button href="/auth/google" variant="contained" color="primary" fullWidth aria-label="Full width button group">
               <img src="/assets/images/google.png" alt="google-icon" height="22" width="22"/>
-                Sign In with Google
+                Log In with Google
           </Button>
         </DialogContent>
         <DialogActions>

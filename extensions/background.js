@@ -1,7 +1,7 @@
 const options = {
   type: 'basic',
   iconUrl: 'icon16.png',
-  title: "This is a notification",
+  title: "Polly Pocket notification",
   message: "Sucessfully added an article!"
 }
 

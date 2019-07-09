@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../store';
 import AppBar from '@material-ui/core/AppBar';
-import { Grid, FormHelperText } from '@material-ui/core';
 
 process.env.PUBLIC_URL = process.env.PUBLIC_URL || '';
 

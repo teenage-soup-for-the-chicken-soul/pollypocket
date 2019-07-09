@@ -11,6 +11,9 @@ const cloudant = Cloudant({
 
 //POSTS NEW ARTICLE WITH JSDOM
 async function insertData(obj) {
+  if(!obj.goalId){
+    obj.goalId = "null"
+  }
   const db = cloudant.use('articles');
   let cssURL = [];
   let cssStyle = [];
