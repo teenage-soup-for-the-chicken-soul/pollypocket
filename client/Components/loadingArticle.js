@@ -6,16 +6,15 @@ const stylesheet = {
     flexDirection: 'column',
     paddingTop: '50vh',
     paddingLeft: '50vw',
+    backgroundColor: '#E5E5E5',
   },
 };
 
 class LoadingArticle extends React.Component {
   render() {
     return (
-      <div className="loadArticlePage">
-        <div style={stylesheet.full}>
-          <div className="loader" />
-        </div>
+      <div style={stylesheet.full}>
+        <div className="loader" />
       </div>
     );
   }

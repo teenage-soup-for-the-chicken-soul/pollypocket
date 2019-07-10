@@ -50,7 +50,12 @@ class AddArticleForm extends React.Component {
         <img
           src={process.env.PUBLIC_URL + '/assets/images/addPageBackground.png'}
           alt="polly-adding-article"
-          style={{ minWidth: '100vw', height: 'auto', display: 'block' }}
+          style={{
+            minWidth: '100vw',
+            height: '100%',
+            display: 'block',
+            zIndex: '-10',
+          }}
         />
         <form className="form-add-article">
           <label>Article Url:</label>

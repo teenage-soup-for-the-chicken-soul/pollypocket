@@ -22,22 +22,24 @@ import Typography from '@material-ui/core/Typography';
 
 let stylesheet = {
   greaterContainer: {
-    padding: '7vh 5vw 7vh 5vw',
     display: 'grid',
     gridTemplateColumns: 'repeat(2, auto [col-start])',
     gridGap: '2vw',
+    marginTop: '25vh',
+    marginLeft: '5vw',
+    marginRight: '5vw',
   },
   container: {
     maxWidth: '45vw',
     display: 'grid',
     gridTemplateColumns: 'repeat(1, auto [col-start])',
-    gridGap: '50px',
+    gridTemplateRows: 'minmax(10vh, max-content) repeat(auto-fill, 33vh)',
+    gridGap: '35px',
   },
   media: {
-    height: 140,
+    height: '15vh',
   },
   addBtnContainer: {
-    marginTop: '5vh',
     marginBottom: '2vh',
   },
   addBtn: {
@@ -46,7 +48,6 @@ let stylesheet = {
     backgroundColor: '#e8f8c1',
   },
   header: {
-    marginTop: '5vh',
     fontFamily: 'Zilla Slab',
     fontSize: '2rem',
     color: '#846267',
@@ -62,16 +63,22 @@ let stylesheet = {
   },
   headerContainer: {
     display: 'flex',
+    alignContent: 'baseline',
   },
   viewButton: {
-    width: '200px',
+    width: '203px',
     height: '30px',
     color: '#846267',
-    marginTop: '5vh',
+    marginTop: '1vh',
     marginLeft: '20px',
     backgroundColor: '#e8f8c1',
     fontFamily: 'Open Sans',
     borderRadius: '2px',
+  },
+  artTitle: {
+    fontSize: '1rem',
+    fontFamily: 'Zilla Slab',
+    color: '',
   },
 };
 
@@ -214,7 +221,8 @@ class Dashboard extends React.Component {
                       title={article.title}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="h4">
+                      {/* gutterBottom variant="h4" component="h4" */}
+                      <Typography style={stylesheet.artTitle}>
                         {article.title}
                       </Typography>
                     </CardContent>

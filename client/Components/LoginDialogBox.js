@@ -72,7 +72,7 @@ class LogInDialogBox extends React.Component {
             required={true}
             onChange={event => this.setState({ password: event.target.value })}
           />
-          <Button href="/auth/google" variant="contained" color="primary" fullWidth aria-label="Full width button group">
+          <Button href="/auth/google" variant="contained" color="#D7E2D0" fullWidth aria-label="Full width button group">
               <img src="/assets/images/google.png" alt="google-icon" height="22" width="22"/>
                 Log In with Google
           </Button>
