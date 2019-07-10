@@ -1,96 +1,97 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { getArticlesThunk } from '../store/reducers/articles';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { connect } from "react-redux";
+import { getArticlesThunk } from "../store/reducers/articles";
+import { Link } from "react-router-dom";
 
-import { deleteArticleThunk } from '../store/reducers/articles';
-import { markReadThunk } from '../store/reducers/articles';
-import { markUnreadThunk } from '../store/reducers/articles';
-import StatusGraph from './statusGraph';
-import TagGraph from './tagsGraph';
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Chip from '@material-ui/core/Chip';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+import { deleteArticleThunk } from "../store/reducers/articles";
+import { markReadThunk } from "../store/reducers/articles";
+import { markUnreadThunk } from "../store/reducers/articles";
+import { changeTagThunk } from "../store/reducers/articles";
+import StatusGraph from "./statusGraph";
+import TagGraph from "./tagsGraph";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import Chip from "@material-ui/core/Chip";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Typography from "@material-ui/core/Typography";
 
 let stylesheet = {
   greaterContainer: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, auto [col-start])',
-    gridGap: '2vw',
-    marginTop: '25vh',
-    marginLeft: '5vw',
-    marginRight: '5vw',
+    display: "grid",
+    gridTemplateColumns: "repeat(2, auto [col-start])",
+    gridGap: "2vw",
+    marginTop: "25vh",
+    marginLeft: "5vw",
+    marginRight: "5vw"
   },
   container: {
-    maxWidth: '45vw',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(1, auto [col-start])',
-    gridTemplateRows: 'minmax(10vh, max-content) repeat(auto-fill, 33vh)',
-    gridGap: '35px',
+    maxWidth: "45vw",
+    display: "grid",
+    gridTemplateColumns: "repeat(1, auto [col-start])",
+    gridTemplateRows: "minmax(10vh, max-content) repeat(auto-fill, 33vh)",
+    gridGap: "35px"
   },
   media: {
-    height: '15vh',
+    height: "15vh"
   },
   addBtnContainer: {
-    marginBottom: '2vh',
+    marginBottom: "2vh"
   },
   addBtn: {
-    fontFamily: 'Open Sans',
-    width: '28vw',
-    backgroundColor: '#e8f8c1',
+    fontFamily: "Open Sans",
+    width: "28vw",
+    backgroundColor: "#e8f8c1"
   },
   header: {
-    fontFamily: 'Zilla Slab',
-    fontSize: '2rem',
-    color: '#846267',
+    fontFamily: "Zilla Slab",
+    fontSize: "2rem",
+    color: "#846267"
   },
   sideNav: {
-    width: '30vw',
-    height: '100%',
+    width: "30vw",
+    height: "100%"
   },
   dataPlaceholder: {
-    maxWidth: '28vw',
-    height: '65%',
-    marginBottom: '2vh',
+    maxWidth: "28vw",
+    height: "65%",
+    marginBottom: "2vh"
   },
   headerContainer: {
-    display: 'flex',
-    alignContent: 'baseline',
+    display: "flex",
+    alignContent: "baseline"
   },
   viewButton: {
-    width: '203px',
-    height: '30px',
-    color: '#846267',
-    marginTop: '1vh',
-    marginLeft: '20px',
-    backgroundColor: '#e8f8c1',
-    fontFamily: 'Open Sans',
-    borderRadius: '2px',
+    width: "203px",
+    height: "30px",
+    color: "#846267",
+    marginTop: "1vh",
+    marginLeft: "20px",
+    backgroundColor: "#e8f8c1",
+    fontFamily: "Open Sans",
+    borderRadius: "2px"
   },
   artTitle: {
-    fontSize: '1rem',
-    fontFamily: 'Zilla Slab',
-    color: '',
-  },
+    fontSize: "1rem",
+    fontFamily: "Zilla Slab",
+    color: ""
+  }
 };
 
 class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      status: 'unread',
+      status: "unread",
       open: false,
-      snack: '',
-      goalId: '',
-      changedArticle: '',
+      snack: "",
+      goalId: "",
+      changedArticle: ""
     };
   }
   async componentDidMount() {
@@ -98,22 +99,22 @@ class Dashboard extends React.Component {
   }
   render() {
     let readArticles = this.props.articles.filter(
-      article => article.read === 'false'
+      article => article.read === "false"
     );
     let unreadArticles = this.props.articles.filter(
-      article => article.read === 'true'
+      article => article.read === "true"
     );
 
     let articleView;
-    if (this.state.status === 'unread') {
+    if (this.state.status === "unread") {
       articleView = readArticles;
-    } else if (this.state.status === 'read') {
+    } else if (this.state.status === "read") {
       articleView = unreadArticles;
     }
 
     const data = [
       { x: 0, y: readArticles.length },
-      { x: 1, y: unreadArticles.length },
+      { x: 1, y: unreadArticles.length }
     ];
 
     return (
@@ -177,26 +178,26 @@ class Dashboard extends React.Component {
             <div style={stylesheet.header}>ARTICLES</div>
             <Button
               onClick={() => {
-                this.setState({ status: 'unread' });
+                this.setState({ status: "unread" });
               }}
               variant="contained"
               size="small"
               style={stylesheet.viewButton}
               onClick={() => {
-                this.setState({ status: 'unread' });
+                this.setState({ status: "unread" });
               }}
             >
               UNREAD
             </Button>
             <Button
               onClick={() => {
-                this.setState({ status: 'read' });
+                this.setState({ status: "read" });
               }}
               variant="contained"
               size="small"
               style={stylesheet.viewButton}
               onClick={() => {
-                this.setState({ status: 'read' });
+                this.setState({ status: "read" });
               }}
             >
               READ
@@ -208,10 +209,10 @@ class Dashboard extends React.Component {
               <Card key={index} className="card" width="340">
                 <Link
                   to={{
-                    pathname: '/article',
+                    pathname: "/article",
                     state: {
-                      currentArticle: article,
-                    },
+                      currentArticle: article
+                    }
                   }}
                   key={article._id}
                 >
@@ -234,10 +235,10 @@ class Dashboard extends React.Component {
                   <Button size="small" color="primary">
                     <Link
                       to={{
-                        pathname: '/article',
+                        pathname: "/article",
                         state: {
-                          currentArticle: article,
-                        },
+                          currentArticle: article
+                        }
                       }}
                       key={article._id}
                     >
@@ -245,7 +246,7 @@ class Dashboard extends React.Component {
                     </Link>
                   </Button>
 
-                  {this.state.status === 'unread' ? (
+                  {this.state.status === "unread" ? (
                     <Button
                       variant="contained"
                       size="small"
@@ -265,7 +266,7 @@ class Dashboard extends React.Component {
                       color="grey"
                       onClick={() => {
                         this.setState({
-                          snack: `Adding "${article.title}" to Library`,
+                          snack: `Adding "${article.title}" to Library`
                         });
                         this.setState({ open: true });
                         this.props.markUnread(article);
@@ -286,24 +287,31 @@ class Dashboard extends React.Component {
                   >
                     Delete
                   </Button>
-                  {article.goalId ? (
+                  {article.goalId !== "null" ? (
                     <Chip label={article.goalId} />
                   ) : (
                     <div>
                       <select
                         id="goalSelect"
-                        onChange={event =>
-                          this.setState({
-                            changedArticle: article,
-                            goalId: event.target.value,
-                          })
-                        }
+                        onChange={event => this.setState({ goalId: event.target.value })}
                       >
                         <option value="Learning">Learning</option>
                         <option value="Leisure">Fun</option>
                         <option value="Career">Career</option>
                         <option value="News">News</option>
                       </select>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        color="grey"
+                        value="Submit"
+                        onClick={() => {
+
+                            this.props.changeTag(article, this.state.goalId);
+                        }}
+                      >
+                        Submit Tag
+                      </Button>
                     </div>
                   )}
                 </CardActions>
@@ -317,13 +325,13 @@ class Dashboard extends React.Component {
           {this.state.open ? (
             <Snackbar
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left"
               }}
               open={open}
               autoHideDuration={1000}
               ContentProps={{
-                'aria-describedby': 'message-id',
+                "aria-describedby": "message-id"
               }}
               message={<span id="message-id">{this.state.snack}</span>}
               action={[
@@ -337,7 +345,7 @@ class Dashboard extends React.Component {
                   }}
                 >
                   <CloseIcon />
-                </IconButton>,
+                </IconButton>
               ]}
             />
           ) : (
@@ -350,7 +358,7 @@ class Dashboard extends React.Component {
 }
 const mapState = state => ({
   articles: state.articles.articles,
-  userKey: state.user.uniqueKey,
+  userKey: state.user.uniqueKey
 });
 
 const mapDispatch = dispatch => ({
@@ -358,6 +366,7 @@ const mapDispatch = dispatch => ({
   deleteArticle: (id, rev) => dispatch(deleteArticleThunk(id, rev)),
   markRead: article => dispatch(markReadThunk(article)),
   markUnread: article => dispatch(markUnreadThunk(article)),
+  changeTag: (article, value) => dispatch(changeTagThunk(article, value))
 });
 
 export default connect(

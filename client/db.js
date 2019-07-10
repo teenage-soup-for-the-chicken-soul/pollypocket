@@ -52,6 +52,7 @@ export default class DB {
       styleCss: article.styleCss,
       linkData: article.linkData,
       articleURL: article.articleURL,
+      goalId: article.goalId,
       read: "true"
 
     })
@@ -68,10 +69,28 @@ export default class DB {
       styleCss: article.styleCss,
       linkData: article.linkData,
       articleURL: article.articleURL,
+      goalId: article.goalId,
       read: "false"
 
     })
   }
+
+ changeTag(article, value){
+  this.db.put({
+    _id: article._id,
+    _rev: article._rev,
+    userKey: article.userKey,
+    title: article.title,
+    image: article.image,
+    linkCSS: article.linkCSS,
+    styleCss: article.styleCss,
+    linkData: article.linkData,
+    articleURL: article.articleURL,
+    read: article.read,
+    goalId: value
+  })
+ }
+
   // ARTICLE METHODS
 
 

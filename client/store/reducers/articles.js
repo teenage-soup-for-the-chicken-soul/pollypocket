@@ -80,6 +80,20 @@ console.log('Error in the mark read thunk', error)
   }
 }
 
+export const changeTagThunk = (article, value) => async dispatch =>{
+  console.log("in the change thunk")
+  try {
+    let currentdb = await new db('articles');
+    await currentdb.changeTag(article)
+    await currentdb.createDBIndex();
+    const res = await currentdb.findArticle(article.userKey);
+    dispatch(getArticles(res.docs));
+  } catch (error) {
+console.log('Error in the changeTag thunk', error)
+  }
+}
+
+
 const initialState = {
   articles: [],
 };
