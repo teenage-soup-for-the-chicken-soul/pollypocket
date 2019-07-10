@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-
+import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -89,6 +89,8 @@ class Dashboard extends React.Component {
       status: 'unread',
       open: false,
       snack: '',
+      goalId: '',
+      changedArticle: '',
     };
   }
   async componentDidMount() {
@@ -284,6 +286,26 @@ class Dashboard extends React.Component {
                   >
                     Delete
                   </Button>
+                  {article.goalId ? (
+                    <Chip label={article.goalId} />
+                  ) : (
+                    <div>
+                      <select
+                        id="goalSelect"
+                        onChange={event =>
+                          this.setState({
+                            changedArticle: article,
+                            goalId: event.target.value,
+                          })
+                        }
+                      >
+                        <option value="Learning">Learning</option>
+                        <option value="Leisure">Fun</option>
+                        <option value="Career">Career</option>
+                        <option value="News">News</option>
+                      </select>
+                    </div>
+                  )}
                 </CardActions>
               </Card>
             ))
