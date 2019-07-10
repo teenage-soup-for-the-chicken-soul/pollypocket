@@ -78,7 +78,7 @@ const startListening = () => {
   const server = app.listen(PORT, () =>
     console.log(`
     ==> 🌎 Listening at http://localhost:${PORT}
-    http://localhost:3000/
+    http://localhost:3000/ mode: ${process.env.NODE_ENV}
 `)
   );
 
