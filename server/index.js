@@ -12,7 +12,7 @@ const sessionStore = new SequelizeStore({ db });
 const socketio = require('socket.io');
 const compression = require('compression');
 
-// if (process.env.NODE_ENV !== 'production') require('../secrets');
+if (process.env.NODE_ENV !== 'production') require('../secrets');
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id));
@@ -78,7 +78,7 @@ const startListening = () => {
   const server = app.listen(PORT, () =>
     console.log(`
     ==> 🌎 Listening at http://localhost:${PORT}
-    http://localhost:3000/ mode: ${process.env.NODE_ENV}
+    http://localhost:3000/
 `)
   );
 
