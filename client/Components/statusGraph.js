@@ -38,7 +38,7 @@ class StatusChart extends Component {
               padAngle={3}
               innerRadius={30}
               radius={170}
-  style={{ labels: { fill: "white", fontSize: 16, fontWeight: "bold" } }}
+  style={{ labels: { fill: "#3c4043", fontSize: 16, fontWeight: "400" } }}
             />
           </div>
         ) : (
