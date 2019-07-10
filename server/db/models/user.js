@@ -70,9 +70,9 @@ const setSaltAndPassword = user => {
 User.beforeCreate(setSaltAndPassword);
 User.beforeCreate(user => {
   if (user.googleId) {
-    user.uniqueKey = user.googleId;
+    user.uniqueKey = ''+user.googleId;
   } else {
-    user.uniqueKey = uuidv1();
+    user.uniqueKey =''+uuidv1();
   }
 });
 User.beforeUpdate(setSaltAndPassword);
