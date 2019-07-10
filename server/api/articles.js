@@ -11,9 +11,6 @@ const cloudant = Cloudant({
 
 //POSTS NEW ARTICLE WITH JSDOM
 async function insertData(obj) {
-  if(!obj.goalId){
-    obj.goalId = "null"
-  }
   const db = cloudant.use('articles');
   let cssURL = [];
   let cssStyle = [];
@@ -73,9 +70,14 @@ async function insertData(obj) {
 // POST ROUTES || CREATE
 
 router.post('/', async (req, res, next) => {
+  let goalId = req.body.goalId
+  if(!goalId){
+    goalId = null
+  }
+  let newObj = {articleURL: req.body.articleURL, userKey: req.body.userKey, goalId}
+  console.log(newObj, "this is the obj")
   try {
-    const { userKey, articleURL, goalId } = req.body;
-    await insertData({ articleURL, userKey, goalId });
+    await insertData(newObj);
     res.status(201).send('Success, Article Added!');
   } catch (e) {
     next(e);

@@ -38,9 +38,11 @@ function insertData(obj) {
   });
 }
 
+
 // POST ROUTES || CREATE
 
 router.post('/', async (req, res, next) => {
+  console.log(req.body, "ROUTER!!!!")
   try {
     await insertData(req.body);
     res.status(201).send('Success, Article Added!');

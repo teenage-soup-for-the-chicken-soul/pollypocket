@@ -23,13 +23,11 @@ window.onload = function() {
             init)
             .then((response) => response.json())
             .then(function(data) {
+              console.log(url, "this is url", data, "this is data")
               fetch('http://localhost:3000/api/articles', {
-                     method: 'post',
-                     headers: {
-                       'Accept': 'application/json',
-                       'Content-Type': 'application/json'
-                     },
-                       body: JSON.stringify({ articleUrl: url, userKey: data.id})
+                     method: 'POST',
+                     headers: {'Content-Type': 'application/json'},
+                     body: JSON.stringify({ articleURL: `${url}`, userKey: `${data.id}`})
                      })
                      .then(function (data) {
                        console.log('Request succeeded with JSON response', data);
