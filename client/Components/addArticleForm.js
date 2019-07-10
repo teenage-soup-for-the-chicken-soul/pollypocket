@@ -64,10 +64,10 @@ class AddArticleForm extends React.Component {
             id="myList"
             onChange={event => this.setState({ goalId: event.target.value })}
           >
-            <option value="learning">For Learning</option>
-            <option value="leisure">For Fun</option>
-            <option value="career">For Work</option>
-            <option value="news">To Stay Up To Date</option>
+            <option value="Learning">Learning</option>
+            <option value="Leisure">Fun</option>
+            <option value="Career">Career</option>
+            <option value="News">News</option>
           </select>
           <br />
           <br />
