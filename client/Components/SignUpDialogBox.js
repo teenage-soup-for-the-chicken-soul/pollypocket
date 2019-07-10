@@ -79,7 +79,7 @@ class SignUpDialogBox extends React.Component {
           <Button
             href="/auth/google"
             variant="contained"
-            color="primary"
+            color="#D7E2D0"
             fullWidth
             aria-label="Full width button group"
           >

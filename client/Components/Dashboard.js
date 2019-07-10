@@ -1,27 +1,17 @@
-
-
-
-
-
-
-
-
-import React from "react";
-import { connect } from "react-redux";
-import { getArticlesThunk } from "../store/reducers/articles";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { getArticlesThunk } from '../store/reducers/articles';
+import { Link } from 'react-router-dom';
 
 import { deleteArticleThunk } from '../store/reducers/articles';
 import { markReadThunk } from '../store/reducers/articles';
 import { markUnreadThunk } from '../store/reducers/articles';
-import StatusGraph from "./statusGraph"
-import TagGraph from "./tagsGraph"
+import StatusGraph from './statusGraph';
+import TagGraph from './tagsGraph';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-
-
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -30,26 +20,26 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-
-
 let stylesheet = {
   greaterContainer: {
-    padding: '7vh 5vw 7vh 5vw',
     display: 'grid',
     gridTemplateColumns: 'repeat(2, auto [col-start])',
     gridGap: '2vw',
+    marginTop: '25vh',
+    marginLeft: '5vw',
+    marginRight: '5vw',
   },
   container: {
     maxWidth: '45vw',
     display: 'grid',
     gridTemplateColumns: 'repeat(1, auto [col-start])',
-    gridGap: '50px',
+    gridTemplateRows: 'minmax(10vh, max-content) repeat(auto-fill, 33vh)',
+    gridGap: '35px',
   },
   media: {
-    height: 140,
+    height: '15vh',
   },
   addBtnContainer: {
-    marginTop: '5vh',
     marginBottom: '2vh',
   },
   addBtn: {
@@ -58,7 +48,6 @@ let stylesheet = {
     backgroundColor: '#e8f8c1',
   },
   header: {
-    marginTop: '5vh',
     fontFamily: 'Zilla Slab',
     fontSize: '2rem',
     color: '#846267',
@@ -74,19 +63,23 @@ let stylesheet = {
   },
   headerContainer: {
     display: 'flex',
+    alignContent: 'baseline',
   },
   viewButton: {
-
-    width: "200px",
-    height: "30px",
-    color: "#846267",
-    marginTop: "5vh",
-    marginLeft: "20px",
-    backgroundColor: "#e8f8c1",
-    fontFamily: "Open Sans",
-    borderRadius: "2px"
-  }
-
+    width: '203px',
+    height: '30px',
+    color: '#846267',
+    marginTop: '1vh',
+    marginLeft: '20px',
+    backgroundColor: '#e8f8c1',
+    fontFamily: 'Open Sans',
+    borderRadius: '2px',
+  },
+  artTitle: {
+    fontSize: '1rem',
+    fontFamily: 'Zilla Slab',
+    color: '',
+  },
 };
 
 class Dashboard extends React.Component {
@@ -136,7 +129,7 @@ class Dashboard extends React.Component {
             </Button>
           </div>
           <StatusGraph />
-          <TagGraph/>
+          <TagGraph />
           <Card>
             <CardContent>
               <Typography color="textSecondary" gutterBottom>
@@ -181,38 +174,31 @@ class Dashboard extends React.Component {
           <div style={stylesheet.headerContainer}>
             <div style={stylesheet.header}>ARTICLES</div>
             <Button
-                onClick={() => {
-                  this.setState({ status: "unread" });
-                }}
-              variant="contained"
-              size="small"
-              style={stylesheet.viewButton}
-
               onClick={() => {
                 this.setState({ status: 'unread' });
               }}
-
-            >
-
-              UNREAD
-            </Button>
-            <Button
-                onClick={() => {
-                  this.setState({ status: "read" });
-                }}
               variant="contained"
               size="small"
               style={stylesheet.viewButton}
-
+              onClick={() => {
+                this.setState({ status: 'unread' });
+              }}
+            >
+              UNREAD
+            </Button>
+            <Button
               onClick={() => {
                 this.setState({ status: 'read' });
               }}
-
+              variant="contained"
+              size="small"
+              style={stylesheet.viewButton}
+              onClick={() => {
+                this.setState({ status: 'read' });
+              }}
             >
-
               READ
             </Button>
-
           </div>
 
           {this.props.articles.length !== 0 ? (
@@ -235,7 +221,8 @@ class Dashboard extends React.Component {
                       title={article.title}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="h4">
+                      {/* gutterBottom variant="h4" component="h4" */}
+                      <Typography style={stylesheet.artTitle}>
                         {article.title}
                       </Typography>
                     </CardContent>
@@ -256,33 +243,41 @@ class Dashboard extends React.Component {
                     </Link>
                   </Button>
 
-                  {this.state.status === 'unread'?  <Button
-                    variant="contained"
-                    size="small"
-                    color="grey"
-                    onClick={() => {
-                      this.props.markRead(article);
-                    }}
-                  >
-                    Mark as Read
-                  </Button> : <Button
-                    variant="contained"
-                    size="small"
-                    color="grey"
-                    onClick={() => {
-                      this.props.markUnread(article);
-                    }}
-                  >
-                    Mark as Unread
-                  </Button>}
-
-
+                  {this.state.status === 'unread' ? (
+                    <Button
+                      variant="contained"
+                      size="small"
+                      color="grey"
+                      onClick={() => {
+                        this.setState({ snack: `Finished "${article.title}"` });
+                        this.setState({ open: true });
+                        this.props.markRead(article);
+                      }}
+                    >
+                      Mark as Read
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      size="small"
+                      color="grey"
+                      onClick={() => {
+                        this.setState({
+                          snack: `Adding "${article.title}" to Library`,
+                        });
+                        this.setState({ open: true });
+                        this.props.markUnread(article);
+                      }}
+                    >
+                      Mark as Unread
+                    </Button>
+                  )}
 
                   <Button
                     size="small"
                     color="#846267"
                     onClick={() => {
-                      this.setState({ snack: `${article.title} Deleted` });
+                      this.setState({ snack: `"${article.title}" Deleted` });
                       this.setState({ open: true });
                       this.props.deleteArticle(article);
                     }}
