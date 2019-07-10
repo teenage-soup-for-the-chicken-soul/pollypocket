@@ -12,7 +12,7 @@ class TagChart extends Component {
     super();
     this.state = {
       style: {
-        data: { fill: "#fab85b" }
+        data: { fill: "#c5dbe9" }
       }
     };
   }
@@ -21,12 +21,20 @@ class TagChart extends Component {
   }
 
   render() {
-    let workTags= this.props.articles.filter(
-      article => article.read === "false"
+    let learningTags= this.props.articles.filter(
+      article => article.goalId === "Learning"
     );
-    let readArticles = this.props.articles.filter(
-      article => article.read === "true"
+    let leisureTags= this.props.articles.filter(
+      article => article.goalId === "Leisure"
     );
+    let careerTags= this.props.articles.filter(
+      article => article.goalId === "Career"
+    );
+    let newsTags= this.props.articles.filter(
+      article => article.goalId === "News"
+    );
+
+
 
     return (
       <div>
@@ -35,27 +43,39 @@ class TagChart extends Component {
             <VictoryChart
               height={400}
               width={400}
-              domainPadding={{ x: 40, y: [0, 20] }}
-              scale={{ x: "time" }}
+              domainPadding={{ x: 50, y: [0, 20] }}
             >
               <VictoryBar
+              barWidth={50}
                 style={this.state.style}
                 data={[
-                  { x: "Work", y: 2 },
-                  { x: "Fun", y: 3 },
-                  { x: "Learning", y: 5 },
-                  { x: "News", y: 4 }
+                  { x: "Learning", y: learningTags.length },
+                  { x: "Leisure", y: leisureTags.length},
+                  { x: "Career", y: careerTags.length},
+                  { x: "News", y: newsTags.length }
                 ]}
               />
             </VictoryChart>
           </div>
         ) : (
-          <div className="App">
-            <VictoryPie
-              colorScale={["#d2c1c3"]}
-              data={[{ x: "Add Articles To See Tags Chart", y: 100 }]}
+          <div>
+          <VictoryChart
+            height={400}
+            width={400}
+
+            domainPadding={{ x: 50, y: [0, 20] }}
+          >
+            <VictoryBar
+              style={this.state.style}
+              data={[
+                { x: "Learning", y: 0 },
+                { x: "Leisure", y: 0},
+                { x: "Career", y: 0},
+                { x: "News", y: 0}
+              ]}
             />
-          </div>
+          </VictoryChart>
+        </div>
         )}
       </div>
     );
