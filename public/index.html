@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width initial-scale=1.0" />
     <title>PollyPocket</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#D7E2D0">
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" type="text/css" href="clippy.css" media="all" />
     <link
@@ -26,5 +28,34 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker
+            .register('serviceworker.js')
+            .then(
+              function(registration) {
+                // Registration was successful
+                console.log(
+                  'ServiceWorker registration successful with scope: ',
+                  registration.scope
+                );
+              },
+              function(err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+              }
+            )
+            .catch(function(err) {
+              console.log(err);
+            });
+        });
+      } else {
+        console.log('service worker is not supported');
+      }
+    </script>
+    <noscript>
+      JS required for Polly Pocket
+    </noscript>
   </body>
 </html>

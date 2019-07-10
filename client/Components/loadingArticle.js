@@ -6,7 +6,6 @@ const stylesheet = {
     flexDirection: 'column',
     paddingTop: '50vh',
     paddingLeft: '50vw',
-    backgroundColor: '#E5E5E5',
   },
 };
 
