@@ -12,7 +12,7 @@ const sessionStore = new SequelizeStore({ db });
 const socketio = require('socket.io');
 const compression = require('compression');
 
-if (process.env.NODE_ENV !== 'production') require('../secrets');
+// if (process.env.NODE_ENV !== 'production') require('../secrets');
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id));
