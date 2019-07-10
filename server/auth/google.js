@@ -48,11 +48,9 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
   router.get(
     '/callback',
-    (req, res, next) => {
-      console.log("IN GOOGLE CALLBACK")
-      return passport.authenticate('google', {
+    passport.authenticate('google', {
       successRedirect: '/home',
       failureRedirect: '/login',
     })
-  });
+  );
 }
