@@ -2,6 +2,8 @@
 
 A progressive web app that saves articles online and renders them offline with a built in reading incentive tool.
 
+[Watch Our Demo on YouTube](https://www.youtube.com/watch?v=oeeHZJ-goRg&list=PLx0iOsdUOUmkGcxY8of0CAWlyyXkB90e0&index=7&t=0s)
+
 
 ## Getting Started
 
