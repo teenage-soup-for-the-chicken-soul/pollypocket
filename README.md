@@ -1,4 +1,4 @@
-# Poly Pocket
+# Polly Pocket
 
 A progressive web app that saves articles online and renders them offline with a built in reading incentive tool.
 
@@ -21,22 +21,22 @@ add-cors-to-couchdb
 ```
 
 In order to use the chrome extension functionality make sure to also sign up for a Google Oauth ID/Secret and Chrome Extension Manifest. 
-[Google Oauth Instructions](https://developers.google.com/identity/protocols/OAuth2)
-[Google Developers Console](https://console.developers.google.com)
-Please also create a seperate Client ID for a Chrome App
+* [Google Oauth Instructions](https://developers.google.com/identity/protocols/OAuth2)
+* [Google Developers Console](https://console.developers.google.com)
+* Please also create a seperate Client ID for a Chrome App
 
 
 Create a secrets.js file with these process.env variables
 
-process.env.GOOGLE_CALLBACK = '/auth/google/callback';
+* process.env.GOOGLE_CALLBACK = '/auth/google/callback';
 
 With your ID's and secrets: 
-process.env.CLOUDANT_ID = 'Your CouchDB ID'
-process.env.CLOUDANT_SECRET = 'Your CouchDB Secret'
-process.env.COUCHDB_URL = 'Your CouchDB URL'
-process.env.EXTENSION_MANIFEST = 'Your Chrome Extension Manifest'
-process.env.GOOGLE_CLIENT_ID = 'Your Google Client ID'
-process.env.GOOGLE_CLIENT_SECRET = 'Your Google Client Secret'
+* process.env.CLOUDANT_ID = 'Your CouchDB ID'
+* process.env.CLOUDANT_SECRET = 'Your CouchDB Secret'
+* process.env.COUCHDB_URL = 'Your CouchDB URL'
+* process.env.EXTENSION_MANIFEST = 'Your Chrome Extension Manifest'
+* process.env.GOOGLE_CLIENT_ID = 'Your Google Client ID'
+* process.env.GOOGLE_CLIENT_SECRET = 'Your Google Client Secret'
 
 
 ### Installing
