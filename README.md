@@ -2,12 +2,12 @@
 
 A progressive web app that saves articles online and renders them offline with a built in reading incentive tool.
 
-[Watch Our Demo on YouTube](https://www.youtube.com/watch?v=oeeHZJ-goRg&list=PLx0iOsdUOUmkGcxY8of0CAWlyyXkB90e0&index=7&t=0s)
+[Watch Our Demo Here](https://www.youtube.com/watch?v=oeeHZJ-goRg&list=PLx0iOsdUOUmkGcxY8of0CAWlyyXkB90e0&index=7&t=0s)
 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get your copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 
 ### Prerequisites
@@ -22,21 +22,22 @@ npm install -g add-cors-to-couchdb
 add-cors-to-couchdb
 ```
 
-In order to use the chrome extension functionality make sure to also sign up for a Google Oauth ID/Secret and Chrome Extension Manifest. 
+In order to use the chrome extension functionality make sure to also sign up for a Google OAuth ID/Secret. 
 * [Google Oauth Instructions](https://developers.google.com/identity/protocols/OAuth2)
 * [Google Developers Console](https://console.developers.google.com)
-* Please also create a seperate Client ID for a Chrome App
+
+
+Install the chrome extension [here](https://chrome.google.com/webstore/detail/pollypocket-extension/jmdkjchmkgpngpbfkdeiokoogjehmkel?hl=en)
 
 
 Create a secrets.js file with these process.env variables
 
 * process.env.GOOGLE_CALLBACK = '/auth/google/callback';
 
-With your ID's and secrets: 
+With your IDs and secrets: 
 * process.env.CLOUDANT_ID = 'Your CouchDB ID'
 * process.env.CLOUDANT_SECRET = 'Your CouchDB Secret'
 * process.env.COUCHDB_URL = 'Your CouchDB URL'
-* process.env.EXTENSION_MANIFEST = 'Your Chrome Extension Manifest'
 * process.env.GOOGLE_CLIENT_ID = 'Your Google Client ID'
 * process.env.GOOGLE_CLIENT_SECRET = 'Your Google Client Secret'
 
@@ -58,25 +59,24 @@ npm run start-dev
 Checkout out localhost:3000
 
 
-For the Chrome Extension, please visit [Chrome Extensions](chrome://extensions/) to load and unpack the Polly Pocket Extension. 
-
-
 ## Running the tests
 
-Explain how to run the automated tests for this system
+This script will run unit tests on the project's React Components, Redux Store, and PostgreSQL Models. 
 
-
-### Break down into end to end tests
+```
+npm run test
+```
+<!-- ### Break down into end to end tests
 
 Explain what these tests test and why
 
 ```
 Give an example
-```
+``` -->
 
 ## Deployment
 
-[Live](https://pollypocket-gracehopper.herokuapp.com)
+[Live Site](https://pollypocket-gracehopper.herokuapp.com)
 
 
 ## Built With
