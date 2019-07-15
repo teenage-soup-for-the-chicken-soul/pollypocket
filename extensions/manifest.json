@@ -7,7 +7,7 @@
       "16": "icon16.png"
     },
     "oauth2": {
-    "client_id": "593897832533-9dfh9bevc49mai7tm8ag36cgfk2832op.apps.googleusercontent.com",
+    "client_id": "650490694654-fpmt5l3ouj5j9p8ku9lp0m0dcpmf56sp.apps.googleusercontent.com",
     "scopes":["https://www.googleapis.com/auth/contacts.readonly", "profile", "email"]
     },
     "permissions": ["storage", "notifications", "identity", "tabs"],
