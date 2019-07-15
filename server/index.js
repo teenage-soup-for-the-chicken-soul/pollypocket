@@ -12,6 +12,8 @@ const sessionStore = new SequelizeStore({ db });
 const socketio = require('socket.io');
 const compression = require('compression');
 
+module.exports = app;
+
 if (process.env.NODE_ENV !== 'production') require('../secrets');
 
 // passport registration
